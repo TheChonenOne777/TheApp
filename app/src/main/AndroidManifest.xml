@@ -1,4 +1,4 @@
-<manifest package="com.example.admin.theapp"
+<manifest package="com.admin.theapp"
 
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -10,6 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <activity android:name=".view.HotelsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
+
 
 </manifest>
