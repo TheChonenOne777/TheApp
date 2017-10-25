@@ -1,4 +1,4 @@
-package com.example.admin.theapp;
+package com.admin.theapp;
 
 import org.junit.Test;
 
