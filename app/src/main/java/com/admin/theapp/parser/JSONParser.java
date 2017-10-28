@@ -31,34 +31,33 @@ public class JSONParser {
         final HotelModel output = new HotelModel();
         try {
             final JSONObject json = new JSONObject(readJson(fileName));
-            getHotelData(output, json);
+            modifyHotelModel(output, json);
+            output.setImageName(json.getString("image"));
+            output.setLat(json.getDouble("lat"));
+            output.setLon(json.getDouble("lon"));
         } catch (JSONException ignored) {
         }
         return output;
     }
 
-    private void getHotelData(@NonNull HotelModel output, @NonNull JSONObject json) throws JSONException {
+    private void modifyHotelModel(@NonNull HotelModel output, @NonNull JSONObject json) throws JSONException {
         output.setId(json.getInt("id"));
         output.setName(json.getString("name"));
         output.setAddress(json.getString("address"));
-        output.setStars(json.getInt("stars"));
+        output.setStars(json.getDouble("stars"));
         output.setDistance(json.getDouble("distance"));
-        output.setImage(json.getString("image"));
         output.setSuitesAvailability(json.getString("suites_availability"));
-        output.setLat(json.getDouble("lat"));
-        output.setLon(json.getDouble("lon"));
     }
 
     @NonNull
     public List<HotelModel> parseJsonsFromArray(@NonNull String fileName) {
         final List<HotelModel> output = new ArrayList<>();
         try {
-            final JSONObject json = new JSONObject(readJson(fileName));
-            final JSONArray jsons = json.getJSONArray("");
+            final JSONArray jsons = new JSONArray(readJson(fileName));
             for (int i = 0; i < jsons.length(); i++) {
                 JSONObject hotelJson = jsons.getJSONObject(i);
                 final HotelModel hotelModel = new HotelModel();
-                getHotelData(hotelModel, hotelJson);
+                modifyHotelModel(hotelModel, hotelJson);
                 output.add(hotelModel);
             }
         } catch (JSONException e) {

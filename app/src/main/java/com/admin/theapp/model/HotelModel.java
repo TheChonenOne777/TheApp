@@ -4,15 +4,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 public class HotelModel {
-    private int id;
+    private int    id;
     @NonNull
     private String name;
     @NonNull
     private String address;
-    private int stars;
+    private double stars;
     private double distance;
-    @Nullable
-    private String image;
+    @NonNull
+    private String imageName;
     @Nullable
     private String suitesAvailability;
     private double lat;
@@ -21,6 +21,7 @@ public class HotelModel {
     public HotelModel() {
         this.name = "";
         this.address = "";
+        this.imageName = "";
     }
 
     public void setId(int id) {
@@ -49,11 +50,11 @@ public class HotelModel {
         return address;
     }
 
-    public int getStars() {
+    public double getStars() {
         return stars;
     }
 
-    public void setStars(int stars) {
+    public void setStars(double stars) {
         this.stars = stars;
     }
 
@@ -65,13 +66,13 @@ public class HotelModel {
         this.distance = distance;
     }
 
-    @Nullable
-    public String getImage() {
-        return image;
+    @NonNull
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setImage(@Nullable String image) {
-        this.image = image;
+    public void setImageName(@NonNull String imageName) {
+        this.imageName = imageName;
     }
 
     @Nullable
@@ -110,19 +111,11 @@ public class HotelModel {
 
         final HotelModel that = (HotelModel) o;
 
-        if (id != that.id) {
-            return false;
-        }
-        if (Double.compare(that.lat, lat) != 0) {
-            return false;
-        }
-        if (Double.compare(that.lon, lon) != 0) {
-            return false;
-        }
-        if (!name.equals(that.name)) {
-            return false;
-        }
-        return address.equals(that.address);
+        return id == that.id
+                && Double.compare(that.lat, lat) == 0
+                && Double.compare(that.lon, lon) == 0
+                && name.equals(that.name)
+                && address.equals(that.address);
 
     }
 
@@ -142,15 +135,16 @@ public class HotelModel {
 
     @Override
     public String toString() {
-        return String.format("HotelModel{id=%d," +
-                                     "\nname='%s'," +
-                                     "\naddress='%s'," +
-                                     "\nstars=%d," +
-                                     "\ndistance=%s," +
-                                     "\nimage='%s'," +
-                                     "\nsuitesAvailability='%s'," +
-                                     "\nlat=%s," +
-                                     "\nlon=%s}",
-                             id, name, address, stars, distance, image, suitesAvailability, lat, lon);
+        return "HotelModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", stars=" + stars +
+                ", distance=" + distance +
+                ", imageName='" + imageName + '\'' +
+                ", suitesAvailability='" + suitesAvailability + '\'' +
+                ", lat=" + lat +
+                ", lon=" + lon +
+                '}';
     }
 }
