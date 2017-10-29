@@ -1,6 +1,7 @@
 package com.admin.theapp.view;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +40,16 @@ public class HotelsActivity extends AppCompatActivity implements HotelsAdapter.I
 
     @Override
     public void onClick(HotelModel hotelModel) {
-        // TODO: 10/28/2017 call viewmodel method
+        Intent intent = new Intent(this, HotelDetailsActivity.class);
+        intent.putExtra("id", hotelModel.getId());
+        intent.putExtra("name", hotelModel.getName());
+        intent.putExtra("address", hotelModel.getAddress());
+        intent.putExtra("stars", hotelModel.getStars());
+        intent.putExtra("distance", hotelModel.getDistance());
+        intent.putExtra("suites_availability", hotelModel.getSuitesAvailability());
+        intent.putExtra("lat", hotelModel.getLat());
+        intent.putExtra("lon", hotelModel.getLon());
+        intent.putExtra("image", hotelModel.getImageName());
+        startActivity(intent);
     }
 }

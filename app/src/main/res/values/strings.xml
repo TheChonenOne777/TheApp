@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">TheApp</string>
+    <string name="hotel_details_coordinates">On the map:</string>
+    <string name="hotel_details_activity_display_message">Hotel Details</string>
+    <string name="hotel_details_stars">Stars: %1$.1f</string>
+    <string name="hotel_details_distance">Distance: %1$.2f(km)</string>
+    <string name="hotel_details_suites_availability">Suites available: %1$s</string>
+    <string name="hotel_details_lat">Latitude: %1$.14f</string>
+    <string name="hotel_details_lon">Longitude: %1$.14f</string>
 </resources>
