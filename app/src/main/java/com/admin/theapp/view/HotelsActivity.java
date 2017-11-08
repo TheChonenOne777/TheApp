@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 
 public class HotelsActivity extends AppCompatActivity implements HotelsAdapter.ItemClickListener {
 
+    public static final String HOTEL_DETAILS_ACTIVITY_EXTRA = "id";
     @BindView(R.id.hotels_recycler_view)
     RecyclerView hotelsRecyclerView;
 
@@ -41,15 +42,7 @@ public class HotelsActivity extends AppCompatActivity implements HotelsAdapter.I
     @Override
     public void onClick(HotelModel hotelModel) {
         Intent intent = new Intent(this, HotelDetailsActivity.class);
-        intent.putExtra("id", hotelModel.getId());
-        intent.putExtra("name", hotelModel.getName());
-        intent.putExtra("address", hotelModel.getAddress());
-        intent.putExtra("stars", hotelModel.getStars());
-        intent.putExtra("distance", hotelModel.getDistance());
-        intent.putExtra("suites_availability", hotelModel.getSuitesAvailability());
-        intent.putExtra("lat", hotelModel.getLat());
-        intent.putExtra("lon", hotelModel.getLon());
-        intent.putExtra("image", hotelModel.getImageName());
+        intent.putExtra(HOTEL_DETAILS_ACTIVITY_EXTRA, hotelModel.getId());
         startActivity(intent);
     }
 }

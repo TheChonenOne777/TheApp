@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.admin.theapp.R;
+import com.admin.theapp.model.HotelModel;
 
 import java.io.IOException;
 
@@ -39,22 +40,13 @@ public class HotelDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.hotel_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
-        initFields();
+        final int hotelId = Integer.parseInt(getIntent().getStringExtra(HotelsActivity.HOTEL_DETAILS_ACTIVITY_EXTRA));
+        HotelModel hotelModel = retrieveHotel(hotelId);
     }
 
-    private void initFields() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            name.setText(extras.getString("name"));
-            address.setText(extras.getString("address"));
-            stars.setText(getResources().getString(R.string.hotel_details_stars, extras.getDouble("stars")));
-            distance.setText(getResources().getString(R.string.hotel_details_distance, extras.getDouble("distance")));
-            suites_availability.setText(getResources().getString(R.string.hotel_details_suites_availability, extras.getString("suites_availability")));
-            lat.setText(getResources().getString(R.string.hotel_details_lat, extras.getDouble("lat")));
-            lon.setText(getResources().getString(R.string.hotel_details_lon, extras.getDouble("lon")));
-            image.setImageDrawable(getImageFromAssets(extras.getString("image")));
-            image.setAdjustViewBounds(true);
-        }
+    @Nullable
+    private HotelModel retrieveHotel(int hotelId) {
+        return null;
     }
 
     @Nullable
