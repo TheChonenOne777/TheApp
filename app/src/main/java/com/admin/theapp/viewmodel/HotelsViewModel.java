@@ -2,8 +2,10 @@ package com.admin.theapp.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.OnLifecycleEvent;
 import android.support.annotation.NonNull;
 
 import com.admin.theapp.model.HotelModel;
@@ -21,6 +23,10 @@ public class HotelsViewModel extends AndroidViewModel implements LifecycleObserv
     public HotelsViewModel(@NonNull Application application) {
         super(application);
         parser = new JSONParser(application);
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    void onCreate() {
         final List<HotelModel> hotelModels = parser.parseJsonsFromArray("0777.json");
         hotelModels.add(parser.parseJson("13100.json"));
         hotelModels.add(parser.parseJson("22470.json"));
