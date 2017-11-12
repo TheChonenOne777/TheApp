@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "79480261089",
+    "firebase_url": "https://the-app-chertilov.firebaseio.com",
+    "project_id": "the-app-chertilov",
+    "storage_bucket": "the-app-chertilov.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:79480261089:android:a754c9bf2a65519b",
+        "android_client_info": {
+          "package_name": "com.admin.theapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "79480261089-c54rb33jqsg11ebanhop0g741j8vok3v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.admin.theapp",
+            "certificate_hash": "a14209495084cf1c8ecb49c3f1db509194efecc7"
+          }
+        },
+        {
+          "client_id": "79480261089-7m2kkt3ko65he78c12n45k8c47j3l0g5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZHZPIHbeemN4r3c9jlKNjpQiuvZ8BX_s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "79480261089-7m2kkt3ko65he78c12n45k8c47j3l0g5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

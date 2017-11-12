@@ -1,6 +1,5 @@
 package com.admin.theapp.view;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -9,8 +8,6 @@ import android.widget.TextView;
 
 import com.admin.theapp.R;
 import com.admin.theapp.model.HotelModel;
-
-import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,21 +37,12 @@ public class HotelDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.hotel_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ButterKnife.bind(this);
-        final int hotelId = Integer.parseInt(getIntent().getStringExtra(HotelsActivity.HOTEL_DETAILS_ACTIVITY_EXTRA));
+        final long hotelId = Long.parseLong(getIntent().getStringExtra(HotelsActivity.HOTEL_DETAILS_ACTIVITY_EXTRA));
         HotelModel hotelModel = retrieveHotel(hotelId);
     }
 
     @Nullable
-    private HotelModel retrieveHotel(int hotelId) {
-        return null;
-    }
-
-    @Nullable
-    private Drawable getImageFromAssets(String imageName) {
-        try {
-            return Drawable.createFromStream(getAssets().open(imageName), null);
-        } catch (IOException ignored) {
-        }
+    private HotelModel retrieveHotel(long hotelId) {
         return null;
     }
 }
