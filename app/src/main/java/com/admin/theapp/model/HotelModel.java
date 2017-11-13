@@ -4,14 +4,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 public class HotelModel {
-    private int    id;
+    private long   id;
     @NonNull
     private String name;
     @NonNull
     private String address;
     private double stars;
     private double distance;
-    @NonNull
+    @Nullable
     private String imageName;
     @Nullable
     private String suitesAvailability;
@@ -24,7 +24,7 @@ public class HotelModel {
         this.imageName = "";
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -36,7 +36,7 @@ public class HotelModel {
         this.address = address;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -66,7 +66,7 @@ public class HotelModel {
         this.distance = distance;
     }
 
-    @NonNull
+    @Nullable
     public String getImageName() {
         return imageName;
     }
@@ -111,21 +111,46 @@ public class HotelModel {
 
         final HotelModel that = (HotelModel) o;
 
-        return id == that.id
-                && Double.compare(that.lat, lat) == 0
-                && Double.compare(that.lon, lon) == 0
-                && name.equals(that.name)
-                && address.equals(that.address);
-
+        if (id != that.id) {
+            return false;
+        }
+        if (Double.compare(that.stars, stars) != 0) {
+            return false;
+        }
+        if (Double.compare(that.distance, distance) != 0) {
+            return false;
+        }
+        if (Double.compare(that.lat, lat) != 0) {
+            return false;
+        }
+        if (Double.compare(that.lon, lon) != 0) {
+            return false;
+        }
+        if (!name.equals(that.name)) {
+            return false;
+        }
+        if (!address.equals(that.address)) {
+            return false;
+        }
+        if (imageName != null ? !imageName.equals(that.imageName) : that.imageName != null) {
+            return false;
+        }
+        return suitesAvailability != null ? suitesAvailability.equals(that.suitesAvailability) : that.suitesAvailability == null;
     }
 
     @Override
     public int hashCode() {
         int result;
         long temp;
-        result = id;
+        result = (int) (id ^ (id >>> 32));
         result = 31 * result + name.hashCode();
         result = 31 * result + address.hashCode();
+        temp = Double.doubleToLongBits(stars);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(distance);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (imageName != null ? imageName.hashCode() : 0);
+        result = 31 * result + (suitesAvailability != null ? suitesAvailability.hashCode() : 0);
         temp = Double.doubleToLongBits(lat);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         temp = Double.doubleToLongBits(lon);
@@ -135,16 +160,6 @@ public class HotelModel {
 
     @Override
     public String toString() {
-        return "HotelModel{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", stars=" + stars +
-                ", distance=" + distance +
-                ", imageName='" + imageName + '\'' +
-                ", suitesAvailability='" + suitesAvailability + '\'' +
-                ", lat=" + lat +
-                ", lon=" + lon +
-                '}';
+        return String.format("HotelModel{id=%d, name='%s', address='%s', stars=%s, distance=%s, imageName='%s', suitesAvailability='%s', lat=%s, lon=%s}", id, name, address, stars, distance, imageName, suitesAvailability, lat, lon);
     }
 }
