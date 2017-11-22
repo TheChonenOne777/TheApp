@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.0"
+    compileSdkVersion project.property('compileSdkVersion')
+    buildToolsVersion project.property('buildToolsVersion')
     defaultConfig {
         applicationId "com.admin.theapp"
-        minSdkVersion 21
-        targetSdkVersion 27
+        minSdkVersion project.property('minSdkVersion')
+        targetSdkVersion project.property('targetSdkVersion')
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -26,20 +26,9 @@ android {
 dependencies {
     implementation 'com.google.firebase:firebase-database:11.6.0'
     implementation 'com.google.firebase:firebase-storage:11.6.0'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:27.0.1'
-    testCompile 'junit:junit:4.12'
-    apply plugin: 'com.android.application'
-    compile 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    compile "android.arch.lifecycle:runtime:1.0.3"
-    annotationProcessor "android.arch.lifecycle:compiler:1.0.0"
-    compile "android.arch.lifecycle:extensions:1.0.0"
-    compile 'com.android.support:recyclerview-v7:27.0.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    rootProject.ext.appDependencies.each {
+        add(it.configuration, it.dependency, it.options)
+    }
 }
 
 apply plugin: 'com.google.gms.google-services'

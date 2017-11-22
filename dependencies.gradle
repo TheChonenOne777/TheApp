@@ -1,0 +1,75 @@
+ext {
+    def versionAndroidSDK = '27.0.1'
+    def versionEspressoCore = '2.2.2'
+    def versionConstraintLayout = '1.0.2'
+    def versionFirebase = '11.6.0'
+    def versionJUnit = '4.12'
+    def versionJavaRx = '2.1.2'
+    def versionArch = '1.0.0'
+    def versionArchRuntime = '1.0.3'
+    def versionAndroidRx = '2.0.1'
+    def versionButterknife = '8.8.1'
+    def versionButterknifeCompiler = '8.8.1'
+
+    def androidLibs = [
+            appCompat          : [group: 'com.android.support', name: 'appcompat-v7', version: versionAndroidSDK],
+            annotations        : [group: 'com.android.support', name: 'support-annotations', version: versionAndroidSDK],
+            constraintLayout   : [group: 'com.android.support.constraint', name: 'constraint-layout', version: versionConstraintLayout],
+            archRuntime        : [group: 'android.arch.lifecycle', name: 'runtime', version: versionArchRuntime],
+            archExtensions     : [group: 'android.arch.lifecycle', name: 'extensions', version: versionArch],
+            archCompiler       : [group: 'android.arch.lifecycle', name: 'compiler', version: versionArch],
+            androidRx          : [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: versionAndroidRx],
+            butterknife        : [group: 'com.jakewharton', name: 'butterknife', version: versionButterknife],
+            butterknifeCompiler: [group: 'com.jakewharton', name: 'butterknife-compiler', version: versionButterknifeCompiler],
+            design             : [group: 'com.android.support', name: 'design', version: versionAndroidSDK],
+            firebaseDatabase   : [group: 'com.google.firebase', name: 'firebase-database', version: versionFirebase],
+            firebaseStorage    : [group: 'com.google.firebase', name: 'firebase-storage', version: versionFirebase]
+    ]
+
+    def libs = [
+            javaRx: [group: 'io.reactivex.rxjava2', name: 'rxjava', version: versionJavaRx]
+    ]
+
+    def testLibs = [
+            junit             : [group: 'junit', name: 'junit', version: versionJUnit],
+            androidTestCompile: [group: 'com.android.support.test.espresso', name: 'espresso-core', version: versionEspressoCore]
+    ]
+
+    def modules = [
+            moduleApp        : ":app",
+            moduleDomain     : ":domain",
+            moduleInteractors: ":interactors",
+            moduleRepository : ":repository",
+    ]
+
+    appDependencies = [
+            [configuration: "compile", dependency: project(modules.moduleInteractors)],
+            [configuration: "compile", dependency: androidLibs.appCompat],
+            [configuration: "compile", dependency: androidLibs.constraintLayout],
+            [configuration: "compile", dependency: androidLibs.design],
+            [configuration: "compile", dependency: androidLibs.androidRx],
+            [configuration: "compile", dependency: androidLibs.archRuntime],
+            [configuration: "compile", dependency: androidLibs.archExtensions],
+            [configuration: "annotationProcessor", dependency: androidLibs.archCompiler],
+            [configuration: "compile", dependency: androidLibs.butterknife],
+            [configuration: "annotationProcessor", dependency: androidLibs.butterknifeCompiler],
+            [configuration: "testCompile", dependency: testLibs.junit],
+            [configuration: "androidTestCompile", dependency: testLibs.androidTestCompile,
+             options      : { exclude group: 'com.android.support', module: 'support-annotations' }]
+    ]
+
+    interactorsDependencies = [
+            [configuration: "compile", dependency: project(modules.moduleRepository)],
+            [configuration: "compile", dependency: libs.javaRx],
+            [configuration: "testCompile", dependency: testLibs.junit]
+    ]
+
+    repositoryDependencies = [
+            [configuration: "compile", dependency: libs.javaRx],
+            [configuration: "testCompile", dependency: testLibs.junit]
+    ]
+
+    domainDependencies = [
+            [configuration: "compile", dependency: androidLibs.annotations],
+    ]
+}

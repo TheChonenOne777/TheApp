@@ -1,4 +1,4 @@
-package com.admin.theapp.model;
+package com.admin.theapp.utils.mappers;
 
 import android.support.annotation.NonNull;
 

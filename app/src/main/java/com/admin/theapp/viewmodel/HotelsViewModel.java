@@ -1,15 +1,14 @@
 package com.admin.theapp.viewmodel;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LifecycleObserver;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.admin.theapp.base.BaseViewModel;
 import com.admin.theapp.model.FirebaseHotelModel;
-import com.admin.theapp.model.FirebaseHotelModelToHotelModelMapper;
 import com.admin.theapp.model.HotelModel;
+import com.admin.theapp.utils.mappers.FirebaseHotelModelToHotelModelMapper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-public class HotelsViewModel extends AndroidViewModel implements LifecycleObserver {
+public class HotelsViewModel extends BaseViewModel {
 
     @NonNull
     private final MutableLiveData<List<HotelModel>>    hotels    = new MutableLiveData<>();
