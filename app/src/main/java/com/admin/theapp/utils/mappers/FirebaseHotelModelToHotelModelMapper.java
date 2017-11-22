@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.admin.theapp.model.FirebaseHotelModel;
 import com.admin.theapp.model.HotelModel;
+import com.theapp.tools.tools.Mapper;
 
 public class FirebaseHotelModelToHotelModelMapper extends Mapper<FirebaseHotelModel, HotelModel> {
     @NonNull

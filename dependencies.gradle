@@ -40,10 +40,12 @@ ext {
             moduleDomain     : ":domain",
             moduleInteractors: ":interactors",
             moduleRepository : ":repository",
+            moduleTools      : ":tools"
     ]
 
     appDependencies = [
             [configuration: "compile", dependency: project(modules.moduleInteractors)],
+            [configuration: "compile", dependency: project(modules.moduleTools)],
             [configuration: "compile", dependency: androidLibs.appCompat],
             [configuration: "compile", dependency: androidLibs.constraintLayout],
             [configuration: "compile", dependency: androidLibs.design],
@@ -71,5 +73,10 @@ ext {
 
     domainDependencies = [
             [configuration: "compile", dependency: androidLibs.annotations],
+    ]
+
+    toolsDependencies = [
+            [configuration: "compile", dependency: androidLibs.annotations],
+            [configuration: "compile", dependency: libs.javaRx]
     ]
 }
