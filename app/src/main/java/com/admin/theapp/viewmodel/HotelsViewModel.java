@@ -12,7 +12,6 @@ import com.admin.theapp.utils.mappers.FirebaseHotelModelToHotelModelMapper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
@@ -21,16 +20,14 @@ import java.util.List;
 public class HotelsViewModel extends BaseViewModel {
 
     @NonNull
-    private final MutableLiveData<List<HotelModel>>    hotels    = new MutableLiveData<>();
+    private final MutableLiveData<List<HotelModel>>    hotels            = new MutableLiveData<>();
     @NonNull
-    private final FirebaseDatabase                     database  = FirebaseDatabase.getInstance();
+    private final FirebaseHotelModelToHotelModelMapper mapper            = new FirebaseHotelModelToHotelModelMapper();
     @NonNull
-    private final DatabaseReference                    reference = database.getReference("Hotels");
-    @NonNull
-    private final FirebaseHotelModelToHotelModelMapper mapper    = new FirebaseHotelModelToHotelModelMapper();
+    private final DatabaseReference                    hotelsDbReference = database.getReference("Hotels");
 
     @NonNull
-    private final ValueEventListener valueEventListener = new ValueEventListener() {
+    private final ValueEventListener hotelsValueListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
             GenericTypeIndicator<List<FirebaseHotelModel>> gen = new GenericTypeIndicator<List<FirebaseHotelModel>>() {};
@@ -48,7 +45,7 @@ public class HotelsViewModel extends BaseViewModel {
 
     public HotelsViewModel(@NonNull Application application) {
         super(application);
-        reference.addListenerForSingleValueEvent(valueEventListener);
+        hotelsDbReference.addListenerForSingleValueEvent(hotelsValueListener);
     }
 
     @NonNull

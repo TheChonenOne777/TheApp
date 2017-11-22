@@ -10,16 +10,16 @@ public class FirebaseHotelModelToHotelModelMapper extends Mapper<FirebaseHotelMo
     @NonNull
     @Override
     public HotelModel map(@NonNull FirebaseHotelModel firebaseHotelModel) {
-        final HotelModel hotelModel = new HotelModel();
-        hotelModel.setId(firebaseHotelModel.getId());
-        hotelModel.setName(firebaseHotelModel.getName());
-        hotelModel.setAddress(firebaseHotelModel.getAddress());
-        hotelModel.setDistance(firebaseHotelModel.getDistance());
-        hotelModel.setStars(firebaseHotelModel.getStars());
-        hotelModel.setSuitesAvailability(firebaseHotelModel.getSuites_availability());
-        hotelModel.setImageName(firebaseHotelModel.getImage());
-        hotelModel.setLat(firebaseHotelModel.getLat());
-        hotelModel.setLon(firebaseHotelModel.getLon());
-        return hotelModel;
+        return new HotelModel(
+                firebaseHotelModel.getId(),
+                firebaseHotelModel.getName(),
+                firebaseHotelModel.getAddress(),
+                firebaseHotelModel.getStars(),
+                firebaseHotelModel.getDistance(),
+                firebaseHotelModel.getImage(),
+                firebaseHotelModel.getSuites_availability(),
+                firebaseHotelModel.getLat(),
+                firebaseHotelModel.getLon()
+        );
     }
 }

@@ -67,6 +67,7 @@ ext {
     ]
 
     repositoryDependencies = [
+            [configuration: "compile", dependency: project(modules.moduleDomain)],
             [configuration: "compile", dependency: libs.javaRx],
             [configuration: "testCompile", dependency: testLibs.junit]
     ]
