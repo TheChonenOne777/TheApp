@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.admin.theapp.R;
 import com.admin.theapp.base.BaseActivity;
@@ -16,6 +17,8 @@ import com.admin.theapp.viewmodel.HotelDetailsViewModel;
 import butterknife.BindView;
 
 public class HotelDetailsActivity extends BaseActivity<HotelDetailsViewModel> {
+
+    private static final int DEFAULT_ACTIVITY_RESULT_HOTEL_ID = -1;
 
     @BindView(R.id.hotel_details_image)
     ImageView image;
@@ -38,7 +41,7 @@ public class HotelDetailsActivity extends BaseActivity<HotelDetailsViewModel> {
 
     @NonNull
     private final Observer<HotelModel> hotelModelObserver = hotelModel -> {
-        if(hotelModel != null){
+        if (hotelModel != null) {
             name.setText(hotelModel.getName());
             address.setText(hotelModel.getAddress());
             stars.setText(String.valueOf(hotelModel.getStars()));
@@ -53,7 +56,11 @@ public class HotelDetailsActivity extends BaseActivity<HotelDetailsViewModel> {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        final long hotelId = Long.parseLong(getIntent().getStringExtra(HotelsActivity.HOTEL_DETAILS_ACTIVITY_EXTRA));
+        final long hotelId = getIntent().getLongExtra(HotelsActivity.HOTEL_DETAILS_ACTIVITY_EXTRA, DEFAULT_ACTIVITY_RESULT_HOTEL_ID);
+        if (hotelId == DEFAULT_ACTIVITY_RESULT_HOTEL_ID) {
+            Toast.makeText(this, "Hotel does not exist", Toast.LENGTH_SHORT).show();
+            this.finish();
+        }
         viewModel.retrieveHotelModel(hotelId);
         viewModel.getHotelModel().observe(this, hotelModelObserver);
     }
