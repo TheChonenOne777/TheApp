@@ -1,7 +1,7 @@
 apply plugin: 'java-library'
 
 dependencies {
-    rootProject.ext.domainDependencies.each {
+    rootProject.ext.repositoryDependencies.each {
         add(it.configuration, it.dependency, it.options)
     }
 }

@@ -1,9 +1,9 @@
-package com.admin.theapp.model;
+package com.admin.theapp;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-public class HotelModel {
+public class Hotel {
     private final long   id;
     @NonNull
     private final String name;
@@ -18,15 +18,15 @@ public class HotelModel {
     private final double lat;
     private final double lon;
 
-    public HotelModel(long id,
-                      @NonNull String name,
-                      @NonNull String address,
-                      double stars,
-                      double distance,
-                      @Nullable String imageName,
-                      @Nullable String suitesAvailability,
-                      double lat,
-                      double lon) {
+    public Hotel(long id,
+                 @NonNull String name,
+                 @NonNull String address,
+                 double stars,
+                 double distance,
+                 @Nullable String imageName,
+                 @Nullable String suitesAvailability,
+                 double lat,
+                 double lon) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -87,7 +87,7 @@ public class HotelModel {
             return false;
         }
 
-        final HotelModel that = (HotelModel) o;
+        final Hotel that = (Hotel) o;
 
         return id == that.id
                 && Double.compare(that.stars, stars) == 0
