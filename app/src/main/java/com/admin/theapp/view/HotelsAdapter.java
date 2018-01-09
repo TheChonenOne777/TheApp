@@ -15,15 +15,15 @@ import android.widget.TextView;
 
 import com.admin.theapp.R;
 import com.admin.theapp.model.HotelModel;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelViewHolder> {
 
-    @NonNull
     private static final String PATH_TO_IMAGE = "hotels/";
     private static final long   ONE_MEGABYTE  = 1024 * 1024;
 
@@ -32,9 +32,10 @@ public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelViewH
     @NonNull
     private Context           context;
 
-    @NonNull
-    private final StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+    @Inject
+    StorageReference storageReference;
 
+    @Inject
     HotelsAdapter(@NonNull Context context) {
         this.context = context;
     }

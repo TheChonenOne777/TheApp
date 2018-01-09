@@ -6,8 +6,6 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.support.annotation.NonNull;
 
-import com.google.firebase.database.FirebaseDatabase;
-
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
 import io.reactivex.Maybe;
@@ -29,8 +27,6 @@ public abstract class BaseViewModel extends AndroidViewModel implements Lifecycl
 
     @NonNull
     protected final CompositeDisposable disposables = new CompositeDisposable();
-    @NonNull
-    protected final FirebaseDatabase    database    = FirebaseDatabase.getInstance();
 
     public BaseViewModel(@NonNull Application application) {
         super(application);

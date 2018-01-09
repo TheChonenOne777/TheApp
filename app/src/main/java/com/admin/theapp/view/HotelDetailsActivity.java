@@ -1,7 +1,6 @@
 package com.admin.theapp.view;
 
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -37,8 +36,6 @@ public class HotelDetailsActivity extends BaseActivity<HotelDetailsViewModel> {
     @BindView(R.id.hotel_details_lon)
     TextView  lon;
 
-    private HotelDetailsViewModel viewModel;
-
     @NonNull
     private final Observer<HotelModel> hotelModelObserver = hotelModel -> {
         if (hotelModel != null) {
@@ -70,8 +67,9 @@ public class HotelDetailsActivity extends BaseActivity<HotelDetailsViewModel> {
         return R.layout.hotel_details;
     }
 
+    @NonNull
     @Override
-    protected HotelDetailsViewModel getViewModel() {
-        return viewModel = ViewModelProviders.of(this).get(HotelDetailsViewModel.class);
+    protected Class<HotelDetailsViewModel> getViewModelClass() {
+        return HotelDetailsViewModel.class;
     }
 }

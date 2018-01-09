@@ -6,8 +6,16 @@ import com.admin.theapp.Hotel;
 import com.admin.theapp.model.HotelModel;
 import com.theapp.tools.tools.Mapper;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class HotelToHotelModelMapper extends Mapper<Hotel, HotelModel> {
+
+    @Inject
+    HotelToHotelModelMapper() { // for dagger2
+    }
+
     @NonNull
     @Override
     public HotelModel map(@NonNull Hotel hotel) {
