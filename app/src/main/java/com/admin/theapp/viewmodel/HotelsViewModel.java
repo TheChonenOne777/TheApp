@@ -2,7 +2,6 @@ package com.admin.theapp.viewmodel;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.admin.theapp.HotelsApp;
 import com.admin.theapp.base.BaseViewModel;
@@ -15,6 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
+import com.theapp.tools.Logger;
 
 import java.util.List;
 
@@ -43,14 +43,15 @@ public class HotelsViewModel extends BaseViewModel {
 
         @Override
         public void onCancelled(DatabaseError databaseError) {
-            Log.e("Failed to load: ", databaseError.getMessage());
+            logError("Failed to load: " + databaseError.getMessage());
         }
     };
 
     @Inject
     public HotelsViewModel(@NonNull HotelsApp application,
+                           @NonNull Logger logger,
                            @NonNull FirebaseHotelModelToHotelModelMapper mapper) {
-        super(application);
+        super(application, logger);
         this.mapper = mapper;
         hotelsDbReference.addListenerForSingleValueEvent(hotelsValueListener);
     }
