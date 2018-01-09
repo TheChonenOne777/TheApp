@@ -24,8 +24,8 @@ android {
 }
 
 dependencies {
-    implementation 'com.google.firebase:firebase-database:11.6.0'
-    implementation 'com.google.firebase:firebase-storage:11.6.0'
+    implementation 'com.google.firebase:firebase-database:11.8.0'
+    implementation 'com.google.firebase:firebase-storage:11.8.0'
     rootProject.ext.appDependencies.each {
         add(it.configuration, it.dependency, it.options)
     }
