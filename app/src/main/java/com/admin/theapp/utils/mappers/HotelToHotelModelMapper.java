@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.admin.theapp.Hotel;
 import com.admin.theapp.model.HotelModel;
-import com.theapp.tools.tools.Mapper;
+import com.theapp.tools.Mapper;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

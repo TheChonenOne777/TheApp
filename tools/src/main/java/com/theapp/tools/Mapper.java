@@ -1,4 +1,4 @@
-package com.theapp.tools.tools;
+package com.theapp.tools;
 
 import android.support.annotation.NonNull;
 

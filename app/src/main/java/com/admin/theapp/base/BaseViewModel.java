@@ -6,6 +6,8 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleObserver;
 import android.support.annotation.NonNull;
 
+import com.theapp.tools.Logger;
+
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
 import io.reactivex.Maybe;
@@ -17,6 +19,7 @@ import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 import io.reactivex.internal.observers.ConsumerSingleObserver;
 import io.reactivex.internal.operators.maybe.MaybeCallbackObserver;
 import io.reactivex.observers.DisposableCompletableObserver;
@@ -26,10 +29,16 @@ import io.reactivex.schedulers.Schedulers;
 public abstract class BaseViewModel extends AndroidViewModel implements LifecycleObserver {
 
     @NonNull
+    private final Logger logger;
+
+    @NonNull
     protected final CompositeDisposable disposables = new CompositeDisposable();
 
-    public BaseViewModel(@NonNull Application application) {
+
+    public BaseViewModel(@NonNull Application application,
+                         @NonNull Logger logger) {
         super(application);
+        this.logger = logger;
     }
 
     @Override
@@ -109,5 +118,42 @@ public abstract class BaseViewModel extends AndroidViewModel implements Lifecycl
 
         disposables.add(completableObserver);
         return completableObserver;
+    }
+
+    @NonNull
+    protected final <E> Function<Throwable, Observable<E>> logErrorAndResumeEmpty() {
+        return logError(Observable.<E>empty());
+    }
+
+    @NonNull
+    protected final <E> Function<Throwable, Observable<E>> logAndResumeErrorObservable() {
+        return throwable -> {
+            logError(throwable);
+            return Observable.error(throwable);
+        };
+    }
+
+    @NonNull
+    protected final <E> Function<Throwable, Single<E>> logAndResumeErrorSingle() {
+        return throwable -> {
+            logError(throwable);
+            return Single.error(throwable);
+        };
+    }
+
+    @NonNull
+    protected final <E> Function<Throwable, Observable<E>> logError(Observable<E> observable) {
+        return throwable -> {
+            logError(throwable);
+            return observable;
+        };
+    }
+
+    protected void logError(@NonNull Throwable throwable) {
+        logger.e(getClass().getSimpleName(), "Error " + throwable.getMessage(), throwable);
+    }
+
+    protected void logError(@NonNull String message) {
+        logger.e(getClass().getSimpleName(), "Error " + message);
     }
 }

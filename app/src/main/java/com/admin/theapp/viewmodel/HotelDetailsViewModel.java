@@ -9,7 +9,8 @@ import com.admin.theapp.base.BaseViewModel;
 import com.admin.theapp.interactors.DataInteractor;
 import com.admin.theapp.model.HotelModel;
 import com.admin.theapp.utils.mappers.HotelToHotelModelMapper;
-import com.theapp.tools.tools.adapters.DisposableMaybeObserverAdapter;
+import com.theapp.tools.Logger;
+import com.theapp.tools.adapters.DisposableMaybeObserverAdapter;
 
 import javax.inject.Inject;
 
@@ -34,8 +35,9 @@ public class HotelDetailsViewModel extends BaseViewModel {
 
     @Inject
     public HotelDetailsViewModel(@NonNull HotelsApp application,
+                                 @NonNull Logger logger,
                                  @NonNull HotelToHotelModelMapper hotelToHotelModelMapper) {
-        super(application);
+        super(application, logger);
         this.hotelToHotelModelMapper = hotelToHotelModelMapper;
     }
 
