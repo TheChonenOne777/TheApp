@@ -1,7 +1,6 @@
 package com.admin.theapp.view;
 
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,16 +16,19 @@ import com.admin.theapp.viewmodel.HotelsViewModel;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 
 public class HotelsActivity extends BaseActivity<HotelsViewModel> implements HotelsAdapter.ItemClickListener {
 
     public static final String HOTEL_DETAILS_ACTIVITY_EXTRA = "id";
+
+    @Inject
+    HotelsAdapter hotelsAdapter;
+
     @BindView(R.id.hotels_recycler_view)
     RecyclerView hotelsRecyclerView;
-
-    HotelsAdapter hotelsAdapter;
-    private HotelsViewModel viewModel;
 
     @NonNull
     private final Observer<List<HotelModel>> hotelsObserver = hotelModels -> {
@@ -38,7 +40,6 @@ public class HotelsActivity extends BaseActivity<HotelsViewModel> implements Hot
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        hotelsAdapter = new HotelsAdapter(this);
         hotelsAdapter.setOnClickCallback(this);
         hotelsRecyclerView.setAdapter(hotelsAdapter);
         hotelsRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
@@ -51,9 +52,10 @@ public class HotelsActivity extends BaseActivity<HotelsViewModel> implements Hot
         return R.layout.hotels_layout;
     }
 
+    @NonNull
     @Override
-    protected HotelsViewModel getViewModel() {
-        return viewModel = ViewModelProviders.of(this).get(HotelsViewModel.class);
+    protected Class<HotelsViewModel> getViewModelClass() {
+        return HotelsViewModel.class;
     }
 
     @Override

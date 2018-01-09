@@ -17,14 +17,18 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class HotelsViewModel extends BaseViewModel {
 
+    @Inject
+    DatabaseReference hotelsDbReference;
+
     @NonNull
-    private final MutableLiveData<List<HotelModel>>    hotels            = new MutableLiveData<>();
+    private final FirebaseHotelModelToHotelModelMapper mapper;
+
     @NonNull
-    private final FirebaseHotelModelToHotelModelMapper mapper            = new FirebaseHotelModelToHotelModelMapper();
-    @NonNull
-    private final DatabaseReference                    hotelsDbReference = database.getReference("Hotels");
+    private final MutableLiveData<List<HotelModel>> hotels = new MutableLiveData<>();
 
     @NonNull
     private final ValueEventListener hotelsValueListener = new ValueEventListener() {
@@ -43,9 +47,11 @@ public class HotelsViewModel extends BaseViewModel {
         }
     };
 
-    public HotelsViewModel(@NonNull Application application) {
+    public HotelsViewModel(@NonNull Application application,
+                           @NonNull FirebaseHotelModelToHotelModelMapper mapper) {
         super(application);
         hotelsDbReference.addListenerForSingleValueEvent(hotelsValueListener);
+        this.mapper = mapper;
     }
 
     @NonNull

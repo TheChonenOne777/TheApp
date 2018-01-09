@@ -11,14 +11,18 @@ import com.admin.theapp.model.HotelModel;
 import com.admin.theapp.utils.mappers.HotelToHotelModelMapper;
 import com.theapp.tools.tools.adapters.DisposableMaybeObserverAdapter;
 
+import javax.inject.Inject;
+
 public class HotelDetailsViewModel extends BaseViewModel {
 
+    @Inject
+    DataInteractor dataInteractor;
+
     @NonNull
-    private final DataInteractor              dataInteractor          = new DataInteractor();
+    private final HotelToHotelModelMapper hotelToHotelModelMapper;
+
     @NonNull
-    private final MutableLiveData<HotelModel> hotelModel              = new MutableLiveData<>();
-    @NonNull
-    private final HotelToHotelModelMapper     hotelToHotelModelMapper = new HotelToHotelModelMapper();
+    private final MutableLiveData<HotelModel> hotelModel = new MutableLiveData<>();
 
     @NonNull
     private final DisposableMaybeObserverAdapter<Hotel> hotelObserver = new DisposableMaybeObserverAdapter<Hotel>() {
@@ -28,8 +32,10 @@ public class HotelDetailsViewModel extends BaseViewModel {
         }
     };
 
-    public HotelDetailsViewModel(@NonNull Application application) {
+    public HotelDetailsViewModel(@NonNull Application application,
+                                 @NonNull HotelToHotelModelMapper hotelToHotelModelMapper) {
         super(application);
+        this.hotelToHotelModelMapper = hotelToHotelModelMapper;
     }
 
     @NonNull
