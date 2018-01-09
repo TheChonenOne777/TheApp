@@ -9,8 +9,8 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 abstract class AndroidBindingModule {
     @ContributesAndroidInjector()
-    abstract HotelsActivity contributeHotelsAcitivityInjector();
+    abstract HotelsActivity contributeHotelsActivityInjector();
 
     @ContributesAndroidInjector()
-    abstract HotelDetailsActivity contributeHotelDetailsAcitivityInjector();
+    abstract HotelDetailsActivity contributeHotelDetailsActivityInjector();
 }

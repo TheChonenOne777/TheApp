@@ -1,10 +1,10 @@
 package com.admin.theapp.viewmodel;
 
-import android.app.Application;
 import android.arch.lifecycle.MutableLiveData;
 import android.support.annotation.NonNull;
 
 import com.admin.theapp.Hotel;
+import com.admin.theapp.HotelsApp;
 import com.admin.theapp.base.BaseViewModel;
 import com.admin.theapp.interactors.DataInteractor;
 import com.admin.theapp.model.HotelModel;
@@ -32,7 +32,8 @@ public class HotelDetailsViewModel extends BaseViewModel {
         }
     };
 
-    public HotelDetailsViewModel(@NonNull Application application,
+    @Inject
+    public HotelDetailsViewModel(@NonNull HotelsApp application,
                                  @NonNull HotelToHotelModelMapper hotelToHotelModelMapper) {
         super(application);
         this.hotelToHotelModelMapper = hotelToHotelModelMapper;

@@ -2,6 +2,8 @@ package com.admin.theapp;
 
 import android.support.v7.app.AppCompatDelegate;
 
+import com.admin.theapp.dagger.DaggerAppComponent;
+
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;
 
