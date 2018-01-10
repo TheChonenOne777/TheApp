@@ -1,55 +1,54 @@
 package com.admin.theapp.viewmodel;
 
-import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.OnLifecycleEvent;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
-import com.admin.theapp.model.FirebaseHotelModel;
-import com.admin.theapp.model.FirebaseHotelModelToHotelModelMapper;
+import com.admin.theapp.Hotel;
+import com.admin.theapp.HotelsApp;
+import com.admin.theapp.base.BaseViewModel;
+import com.admin.theapp.firebase.Firebase;
 import com.admin.theapp.model.HotelModel;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
-import com.google.firebase.database.ValueEventListener;
+import com.admin.theapp.utils.mappers.HotelToHotelModelMapper;
+import com.theapp.tools.Logger;
+import com.theapp.tools.adapters.DisposableObserverAdapter;
 
 import java.util.List;
 
-public class HotelsViewModel extends AndroidViewModel implements LifecycleObserver {
+import javax.inject.Inject;
+
+public class HotelsViewModel extends BaseViewModel {
 
     @NonNull
-    private final MutableLiveData<List<HotelModel>>    hotels    = new MutableLiveData<>();
+    private final HotelToHotelModelMapper mapper;
     @NonNull
-    private final FirebaseDatabase                     database  = FirebaseDatabase.getInstance();
-    @NonNull
-    private final DatabaseReference                    reference = database.getReference("Hotels");
-    @NonNull
-    private final FirebaseHotelModelToHotelModelMapper mapper    = new FirebaseHotelModelToHotelModelMapper();
+    private final Firebase                firebase;
 
     @NonNull
-    private final ValueEventListener valueEventListener = new ValueEventListener() {
+    private final MutableLiveData<List<HotelModel>> hotels = new MutableLiveData<>();
+
+    @NonNull
+    private final DisposableObserverAdapter<List<Hotel>> hotelsObserver = new DisposableObserverAdapter<List<Hotel>>() {
         @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-            GenericTypeIndicator<List<FirebaseHotelModel>> gen = new GenericTypeIndicator<List<FirebaseHotelModel>>() {};
-            final List<FirebaseHotelModel> list = dataSnapshot.getValue(gen);
-            if (list != null) {
-                hotels.setValue(mapper.map(list));
-            }
-        }
-
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-            Log.e("Failed to load: ", databaseError.getMessage());
+        public void onNext(@NonNull List<Hotel> hotelList) {
+            hotels.setValue(mapper.map(hotelList));
         }
     };
 
-    public HotelsViewModel(@NonNull Application application) {
-        super(application);
-        reference.addListenerForSingleValueEvent(valueEventListener);
+    @Inject
+    HotelsViewModel(@NonNull HotelsApp application,
+                    @NonNull Logger logger,
+                    @NonNull HotelToHotelModelMapper mapper,
+                    @NonNull Firebase firebase) {
+        super(application, logger);
+        this.mapper = mapper;
+        this.firebase = firebase;
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    void onStart() {
+        execute(firebase.getHotels(), hotelsObserver);
     }
 
     @NonNull

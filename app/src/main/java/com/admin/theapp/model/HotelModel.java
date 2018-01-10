@@ -4,36 +4,38 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 public class HotelModel {
-    private long   id;
+    private final long   id;
     @NonNull
-    private String name;
+    private final String name;
     @NonNull
-    private String address;
-    private double stars;
-    private double distance;
+    private final String address;
+    private final double stars;
+    private final double distance;
     @Nullable
-    private String imageName;
+    private final String imageName;
     @Nullable
-    private String suitesAvailability;
-    private double lat;
-    private double lon;
+    private final String suitesAvailability;
+    private final double lat;
+    private final double lon;
 
-    public HotelModel() {
-        this.name = "";
-        this.address = "";
-        this.imageName = "";
-    }
-
-    public void setId(long id) {
+    public HotelModel(long id,
+                      @NonNull String name,
+                      @NonNull String address,
+                      double stars,
+                      double distance,
+                      @Nullable String imageName,
+                      @Nullable String suitesAvailability,
+                      double lat,
+                      double lon) {
         this.id = id;
-    }
-
-    public void setName(@NonNull String name) {
         this.name = name;
-    }
-
-    public void setAddress(@NonNull String address) {
         this.address = address;
+        this.stars = stars;
+        this.distance = distance;
+        this.imageName = imageName;
+        this.suitesAvailability = suitesAvailability;
+        this.lat = lat;
+        this.lon = lon;
     }
 
     public long getId() {
@@ -54,16 +56,8 @@ public class HotelModel {
         return stars;
     }
 
-    public void setStars(double stars) {
-        this.stars = stars;
-    }
-
     public double getDistance() {
         return distance;
-    }
-
-    public void setDistance(double distance) {
-        this.distance = distance;
     }
 
     @Nullable
@@ -71,33 +65,17 @@ public class HotelModel {
         return imageName;
     }
 
-    public void setImageName(@NonNull String imageName) {
-        this.imageName = imageName;
-    }
-
     @Nullable
     public String getSuitesAvailability() {
         return suitesAvailability;
-    }
-
-    public void setSuitesAvailability(@Nullable String suitesAvailability) {
-        this.suitesAvailability = suitesAvailability;
     }
 
     public double getLat() {
         return lat;
     }
 
-    public void setLat(double lat) {
-        this.lat = lat;
-    }
-
     public double getLon() {
         return lon;
-    }
-
-    public void setLon(double lon) {
-        this.lon = lon;
     }
 
     @Override
@@ -111,31 +89,14 @@ public class HotelModel {
 
         final HotelModel that = (HotelModel) o;
 
-        if (id != that.id) {
-            return false;
-        }
-        if (Double.compare(that.stars, stars) != 0) {
-            return false;
-        }
-        if (Double.compare(that.distance, distance) != 0) {
-            return false;
-        }
-        if (Double.compare(that.lat, lat) != 0) {
-            return false;
-        }
-        if (Double.compare(that.lon, lon) != 0) {
-            return false;
-        }
-        if (!name.equals(that.name)) {
-            return false;
-        }
-        if (!address.equals(that.address)) {
-            return false;
-        }
-        if (imageName != null ? !imageName.equals(that.imageName) : that.imageName != null) {
-            return false;
-        }
-        return suitesAvailability != null ? suitesAvailability.equals(that.suitesAvailability) : that.suitesAvailability == null;
+        return id == that.id
+                && Double.compare(that.stars, stars) == 0
+                && Double.compare(that.distance, distance) == 0
+                && Double.compare(that.lat, lat) == 0 && Double.compare(that.lon, lon) == 0
+                && name.equals(that.name)
+                && address.equals(that.address)
+                && (imageName != null ? imageName.equals(that.imageName) : that.imageName == null)
+                && (suitesAvailability != null ? suitesAvailability.equals(that.suitesAvailability) : that.suitesAvailability == null);
     }
 
     @Override
@@ -156,10 +117,5 @@ public class HotelModel {
         temp = Double.doubleToLongBits(lon);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("HotelModel{id=%d, name='%s', address='%s', stars=%s, distance=%s, imageName='%s', suitesAvailability='%s', lat=%s, lon=%s}", id, name, address, stars, distance, imageName, suitesAvailability, lat, lon);
     }
 }

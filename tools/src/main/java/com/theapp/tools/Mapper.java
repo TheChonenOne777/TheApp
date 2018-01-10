@@ -1,4 +1,4 @@
-package com.admin.theapp.model;
+package com.theapp.tools;
 
 import android.support.annotation.NonNull;
 
