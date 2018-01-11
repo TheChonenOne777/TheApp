@@ -28,14 +28,6 @@ public class HotelsViewModel extends BaseViewModel {
     @NonNull
     private final MutableLiveData<List<HotelModel>> hotels = new MutableLiveData<>();
 
-    @NonNull
-    private final DisposableObserverAdapter<List<Hotel>> hotelsObserver = new DisposableObserverAdapter<List<Hotel>>() {
-        @Override
-        public void onNext(@NonNull List<Hotel> hotelList) {
-            hotels.setValue(mapper.map(hotelList));
-        }
-    };
-
     @Inject
     HotelsViewModel(@NonNull HotelsApp application,
                     @NonNull Logger logger,
@@ -46,9 +38,14 @@ public class HotelsViewModel extends BaseViewModel {
         this.firebase = firebase;
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     void onStart() {
-        execute(firebase.getHotels(), hotelsObserver);
+        execute(firebase.getHotels(), new DisposableObserverAdapter<List<Hotel>>() {
+            @Override
+            public void onNext(@NonNull List<Hotel> hotelList) {
+                hotels.setValue(mapper.map(hotelList));
+            }
+        });
     }
 
     @NonNull
