@@ -12,7 +12,8 @@ import dagger.android.AndroidInjector;
 @Component(modules = {
         AndroidInjectionModule.class,
         AndroidBindingModule.class,
-        AppModule.class
+        AppModule.class,
+        RepoModule.class
 })
 interface AppComponent extends AndroidInjector<HotelsApp> {
     @Component.Builder

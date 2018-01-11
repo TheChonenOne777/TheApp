@@ -99,6 +99,7 @@ ext {
     firebaseDependencies = [
             [configuration: "compile", dependency: project(modules.moduleDomain)],
             [configuration: "compile", dependency: project(modules.moduleTools)],
+            [configuration: "compile", dependency: project(modules.moduleRepository)],
             [configuration: "compile", dependency: libs.dagger],
             [configuration: "compile", dependency: libs.firebaseDatabase]
     ]

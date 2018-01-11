@@ -1,4 +1,4 @@
-package com.admin.theapp.firebase;
+package com.theapp.repository;
 
 import android.support.annotation.NonNull;
 
