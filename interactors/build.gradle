@@ -1,0 +1,10 @@
+apply plugin: 'java-library'
+
+dependencies {
+    rootProject.ext.interactorsDependencies.each {
+        add(it.configuration, it.dependency, it.options)
+    }
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"

@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion project.property('compileSdkVersion')
+    buildToolsVersion project.property('buildToolsVersion')
     defaultConfig {
-        applicationId "com.example.admin.theapp"
-        minSdkVersion 21
-        targetSdkVersion 26
+        applicationId "com.admin.theapp"
+        minSdkVersion project.property('minSdkVersion')
+        targetSdkVersion project.property('targetSdkVersion')
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -17,13 +17,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support:appcompat-v7:26.+'
-    testCompile 'junit:junit:4.12'
+    rootProject.ext.appDependencies.each {
+        add(it.configuration, it.dependency, it.options)
+    }
 }
+
+apply plugin: 'com.google.gms.google-services'
