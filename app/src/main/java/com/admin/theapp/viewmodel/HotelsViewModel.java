@@ -39,7 +39,7 @@ public class HotelsViewModel extends BaseViewModel {
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-    void onStart() {
+    void onCreate() {
         execute(interactor.getHotels(), new DisposableObserverAdapter<List<Hotel>>() {
             @Override
             public void onNext(@NonNull List<Hotel> hotelList) {
