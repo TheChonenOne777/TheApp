@@ -49,12 +49,14 @@ ext {
             moduleDomain     : ":domain",
             moduleInteractors: ":interactors",
             moduleRepository : ":repository",
-            moduleTools      : ":tools"
+            moduleTools      : ":tools",
+            moduleFirebase   : ":firebase"
     ]
 
     appDependencies = [
             [configuration: "compile", dependency: project(modules.moduleInteractors)],
             [configuration: "compile", dependency: project(modules.moduleTools)],
+            [configuration: "compile", dependency: project(modules.moduleFirebase)],
             [configuration: "compile", dependency: androidLibs.appCompat],
             [configuration: "compile", dependency: androidLibs.constraintLayout],
             [configuration: "compile", dependency: androidLibs.design],
@@ -67,14 +69,13 @@ ext {
             [configuration: "testCompile", dependency: testLibs.junit],
             [configuration: "androidTestCompile", dependency: testLibs.androidTestCompile,
              options      : { exclude group: 'com.android.support', module: 'support-annotations' }],
-            [configuration: "compile", dependency: libs.toothpick],
-            [configuration: "annotationProcessor", dependency: libs.toothpickCompiler],
-            [configuration: "testCompile", dependency: libs.toothpickTesting],
             [configuration: "compile", dependency: libs.dagger],
             [configuration: "annotationProcessor", dependency: libs.daggerCompiler],
             [configuration: "compile", dependency: androidLibs.daggerAndroidSupport,
              options      : { exclude module: 'jsr305' }],
-            [configuration: "annotationProcessor", dependency: androidLibs.daggerAndroidProcessor]
+            [configuration: "annotationProcessor", dependency: androidLibs.daggerAndroidProcessor],
+            [configuration: "compile", dependency: libs.firebaseDatabase],
+            [configuration: "compile", dependency: libs.firebaseStorage]
     ]
 
     interactorsDependencies = [
@@ -93,6 +94,14 @@ ext {
 
     domainDependencies = [
             [configuration: "compile", dependency: androidLibs.annotations],
+    ]
+
+    firebaseDependencies = [
+            [configuration: "compile", dependency: project(modules.moduleDomain)],
+            [configuration: "compile", dependency: project(modules.moduleTools)],
+            [configuration: "compile", dependency: project(modules.moduleRepository)],
+            [configuration: "compile", dependency: libs.dagger],
+            [configuration: "compile", dependency: libs.firebaseDatabase]
     ]
 
     toolsDependencies = [

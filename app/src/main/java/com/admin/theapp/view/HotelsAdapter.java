@@ -33,7 +33,7 @@ public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelViewH
     private Context           context;
 
     @Inject
-    StorageReference storageReference;
+    StorageReference storageReference; // TODO: 1/11/2018 remove storage reference from here
 
     @Inject
     HotelsAdapter(@NonNull Context context) {

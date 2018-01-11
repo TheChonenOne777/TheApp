@@ -1,25 +1,25 @@
-package com.admin.theapp.utils.mappers;
+package com.admin.theapp.firebase.utils.mappers;
 
 import android.support.annotation.NonNull;
 
-import com.admin.theapp.model.FirebaseHotelModel;
-import com.admin.theapp.model.HotelModel;
+import com.admin.theapp.Hotel;
+import com.admin.theapp.firebase.model.FirebaseHotelModel;
 import com.theapp.tools.Mapper;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public class FirebaseHotelModelToHotelModelMapper extends Mapper<FirebaseHotelModel, HotelModel> {
+public class FirebaseHotelModelToHotelMapper extends Mapper<FirebaseHotelModel, Hotel> {
 
     @Inject
-    FirebaseHotelModelToHotelModelMapper() { // for dagger2
+    FirebaseHotelModelToHotelMapper() { // for dagger2
     }
 
     @NonNull
     @Override
-    public HotelModel map(@NonNull FirebaseHotelModel firebaseHotelModel) {
-        return new HotelModel(
+    public Hotel map(@NonNull FirebaseHotelModel firebaseHotelModel) {
+        return new Hotel(
                 firebaseHotelModel.getId(),
                 firebaseHotelModel.getName(),
                 firebaseHotelModel.getAddress(),
