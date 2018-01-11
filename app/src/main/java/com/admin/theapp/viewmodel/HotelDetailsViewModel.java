@@ -34,9 +34,9 @@ public class HotelDetailsViewModel extends BaseViewModel {
     };
 
     @Inject
-    public HotelDetailsViewModel(@NonNull HotelsApp application,
-                                 @NonNull Logger logger,
-                                 @NonNull HotelToHotelModelMapper hotelToHotelModelMapper) {
+    HotelDetailsViewModel(@NonNull HotelsApp application,
+                          @NonNull Logger logger,
+                          @NonNull HotelToHotelModelMapper hotelToHotelModelMapper) {
         super(application, logger);
         this.hotelToHotelModelMapper = hotelToHotelModelMapper;
     }

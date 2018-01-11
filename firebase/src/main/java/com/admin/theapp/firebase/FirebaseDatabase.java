@@ -35,14 +35,6 @@ public class FirebaseDatabase implements Firebase {
     @NonNull
     private final DatabaseReference                        hotelsDbReference = com.google.firebase.database.FirebaseDatabase.getInstance().getReference("Hotels");
 
-    @Inject
-    FirebaseDatabase(@NonNull Logger logger,
-                     @NonNull FirebaseHotelModelToHotelMapper mapper) {
-        this.logger = logger;
-        this.mapper = mapper;
-        hotelsDbReference.addListenerForSingleValueEvent(hotelsValueListener);
-    }
-
     @NonNull
     private final ValueEventListener hotelsValueListener = new ValueEventListener() {
         @Override
@@ -59,6 +51,14 @@ public class FirebaseDatabase implements Firebase {
             logger.e(LOG_TAG, "Failed to load: " + databaseError.getMessage());
         }
     };
+
+    @Inject
+    FirebaseDatabase(@NonNull Logger logger,
+                     @NonNull FirebaseHotelModelToHotelMapper mapper) {
+        this.logger = logger;
+        this.mapper = mapper;
+        hotelsDbReference.addListenerForSingleValueEvent(hotelsValueListener);
+    }
 
     @NonNull
     @Override

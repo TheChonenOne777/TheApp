@@ -10,7 +10,7 @@ import io.reactivex.Observable;
 
 
 public interface Firebase {
-
     @NonNull
     Observable<List<Hotel>> getHotels();
+
 }
