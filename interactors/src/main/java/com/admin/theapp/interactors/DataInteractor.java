@@ -10,7 +10,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import io.reactivex.Maybe;
 import io.reactivex.Observable;
 
 @Singleton
@@ -24,7 +23,7 @@ public class DataInteractor {
     }
 
     @NonNull
-    public Maybe<Hotel> getHotelById(long id) {
+    public Observable<Hotel> getHotelById(long id) {
         return hotelsRepo.getHotelById(id);
     }
 

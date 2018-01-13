@@ -11,6 +11,7 @@ import com.admin.theapp.model.HotelModel;
 import com.admin.theapp.utils.mappers.HotelToHotelModelMapper;
 import com.theapp.tools.Logger;
 import com.theapp.tools.adapters.DisposableMaybeObserverAdapter;
+import com.theapp.tools.adapters.DisposableObserverAdapter;
 
 import javax.inject.Inject;
 
@@ -47,6 +48,11 @@ public class HotelDetailsViewModel extends BaseViewModel {
     }
 
     public void retrieveHotelModel(long hotelId) {
-        execute(dataInteractor.getHotelById(hotelId), hotelObserver);
+        execute(dataInteractor.getHotelById(hotelId), new DisposableObserverAdapter<Hotel>() {
+            @Override
+            public void onNext(@NonNull Hotel hotel) {
+                hotelModel.setValue(hotelToHotelModelMapper.map(hotel));
+            }
+        });
     }
 }

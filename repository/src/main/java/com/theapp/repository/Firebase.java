@@ -6,7 +6,6 @@ import com.admin.theapp.Hotel;
 
 import java.util.List;
 
-import io.reactivex.Maybe;
 import io.reactivex.Observable;
 
 
@@ -15,5 +14,5 @@ public interface Firebase {
     Observable<List<Hotel>> getHotels();
 
     @NonNull
-    Maybe<Hotel> getHotelById(long id);
+    Observable<Hotel> getHotelById(long id);
 }
