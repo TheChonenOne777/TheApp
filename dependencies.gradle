@@ -50,13 +50,15 @@ ext {
             moduleInteractors: ":interactors",
             moduleRepository : ":repository",
             moduleTools      : ":tools",
-            moduleFirebase   : ":firebase"
+            moduleFirebase   : ":firebase",
+            moduleCache      : ":cache"
     ]
 
     appDependencies = [
             [configuration: "compile", dependency: project(modules.moduleInteractors)],
             [configuration: "compile", dependency: project(modules.moduleTools)],
             [configuration: "compile", dependency: project(modules.moduleFirebase)],
+            [configuration: "compile", dependency: project(modules.moduleCache)],
             [configuration: "compile", dependency: androidLibs.appCompat],
             [configuration: "compile", dependency: androidLibs.constraintLayout],
             [configuration: "compile", dependency: androidLibs.design],
@@ -102,6 +104,11 @@ ext {
             [configuration: "compile", dependency: project(modules.moduleRepository)],
             [configuration: "compile", dependency: libs.dagger],
             [configuration: "compile", dependency: libs.firebaseDatabase]
+    ]
+
+    cacheDependencies = [
+            [configuration: "compile", dependency: project(modules.moduleRepository)],
+            [configuration: "compile", dependency: libs.javaRx]
     ]
 
     toolsDependencies = [
