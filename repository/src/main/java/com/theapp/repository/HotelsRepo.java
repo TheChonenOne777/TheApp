@@ -10,6 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
 
 @Singleton
@@ -28,8 +29,11 @@ public class HotelsRepo {
     }
 
     @NonNull
-    public Observable<Hotel> getHotelById(long id) {
-        return firebase.getHotelById(id);
+    public Maybe<Hotel> getHotelById(long id) {
+        return hotelsCache.get(id)
+                          .switchIfEmpty(firebase.getHotelById(id)
+                                                 .firstElement()
+                                                 .doOnSuccess(hotel -> hotelsCache.put(id, hotel)));
     }
 
     @NonNull
