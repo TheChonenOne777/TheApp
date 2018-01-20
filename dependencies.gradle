@@ -1,118 +1,137 @@
 ext {
-    def versionAndroidSDK = '27.0.1'
-    def versionEspressoCore = '2.2.2'
-    def versionConstraintLayout = '1.0.2'
-    def versionFirebase = '11.8.0'
-    def versionJUnit = '4.12'
-    def versionJavaRx = '2.1.2'
-    def versionArch = '1.0.0'
-    def versionArchRuntime = '1.0.3'
-    def versionAndroidRx = '2.0.1'
-    def versionButterknife = '8.8.1'
-    def versionButterknifeCompiler = '8.8.1'
-    def versionToothpick = '1.1.1'
-    def versionDagger = '2.11'
+    // Libraries
+    versionAndroidSDK = '27.0.1'
+    versionConstraintLayout = '1.0.2'
+    versionFirebase = '11.8.0'
+    versionJavaRx = '2.1.2'
+    versionArch = '1.0.0'
+    versionArchRuntime = '1.0.3'
+    versionAndroidRx = '2.0.1'
+    versionButterknife = '8.8.1'
+    versionButterknifeCompiler = '8.8.1'
+    versionToothpick = '1.1.1'
+    versionDagger = '2.11'
 
-    def androidLibs = [
+    // Testing
+    versionJUnit = '4.12'
+    versionEspressoCore = '2.2.2'
+
+    modules = [
+            app       : ":app",
+            domain    : ":domain",
+            interactor: ":interactor",
+            repository: ":repository",
+            tools     : ":tools",
+            storage   : ":storage",
+            cache     : ":cache"
+    ]
+    def libs = [
             appCompat             : [group: 'com.android.support', name: 'appcompat-v7', version: versionAndroidSDK],
             annotations           : [group: 'com.android.support', name: 'support-annotations', version: versionAndroidSDK],
             constraintLayout      : [group: 'com.android.support.constraint', name: 'constraint-layout', version: versionConstraintLayout],
+            design                : [group: 'com.android.support', name: 'design', version: versionAndroidSDK],
+
             archRuntime           : [group: 'android.arch.lifecycle', name: 'runtime', version: versionArchRuntime],
             archExtensions        : [group: 'android.arch.lifecycle', name: 'extensions', version: versionArch],
             archCompiler          : [group: 'android.arch.lifecycle', name: 'compiler', version: versionArch],
+
+            javaRx                : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: versionJavaRx],
             androidRx             : [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: versionAndroidRx],
-            butterknife           : [group: 'com.jakewharton', name: 'butterknife', version: versionButterknife],
-            butterknifeCompiler   : [group: 'com.jakewharton', name: 'butterknife-compiler', version: versionButterknifeCompiler],
-            design                : [group: 'com.android.support', name: 'design', version: versionAndroidSDK],
+
+            dagger                : [group: 'com.google.dagger', name: 'dagger', version: versionDagger],
+            daggerCompiler        : [group: 'com.google.dagger', name: 'dagger-compiler', version: versionDagger],
             daggerAndroidSupport  : [group: 'com.google.dagger', name: 'dagger-android-support', version: versionDagger],
-            daggerAndroidProcessor: [group: 'com.google.dagger', name: 'dagger-android-processor', version: versionDagger]
+            daggerAndroidProcessor: [group: 'com.google.dagger', name: 'dagger-android-processor', version: versionDagger],
+
+            firebaseDatabase      : [group: 'com.google.firebase', name: 'firebase-database', version: versionFirebase],
+            firebaseStorage       : [group: 'com.google.firebase', name: 'firebase-storage', version: versionFirebase],
+
+            butterknife           : [group: 'com.jakewharton', name: 'butterknife', version: versionButterknife],
+            butterknifeCompiler   : [group: 'com.jakewharton', name: 'butterknife-compiler', version: versionButterknifeCompiler]
+
     ]
 
-    def libs = [
-            javaRx           : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: versionJavaRx],
-            firebaseDatabase : [group: 'com.google.firebase', name: 'firebase-database', version: versionFirebase],
-            firebaseStorage  : [group: 'com.google.firebase', name: 'firebase-storage', version: versionFirebase],
-            toothpick        : [group: 'com.github.stephanenicolas.toothpick', name: 'toothpick-runtime', version: versionToothpick],
-            toothpickCompiler: [group: 'com.github.stephanenicolas.toothpick', name: 'toothpick-compiler', version: versionToothpick],
-            toothpickTesting : [group: 'com.github.stephanenicolas.toothpick', name: 'toothpick-testing', version: versionToothpick],
-            dagger           : [group: 'com.google.dagger', name: 'dagger', version: versionDagger],
-            daggerCompiler   : [group: 'com.google.dagger', name: 'dagger-compiler', version: versionDagger]
-    ]
-
-    def testLibs = [
+    testLibs = [
             junit             : [group: 'junit', name: 'junit', version: versionJUnit],
             androidTestCompile: [group: 'com.android.support.test.espresso', name: 'espresso-core', version: versionEspressoCore]
     ]
 
-    def modules = [
-            moduleApp        : ":app",
-            moduleDomain     : ":domain",
-            moduleInteractors: ":interactors",
-            moduleRepository : ":repository",
-            moduleTools      : ":tools",
-            moduleFirebase   : ":firebase",
-            moduleCache      : ":cache"
-    ]
+    def compile = 'compile'
+    def api = 'api'
+    def impl = 'implementation'
+    def testImpl = 'testImplementation'
+    def testCompile = 'testCompile'
+    def androidTestImpl = 'androidTestImplementation'
+    def annotationProcessor = 'annotationProcessor'
 
     appDependencies = [
-            [configuration: "compile", dependency: project(modules.moduleInteractors)],
-            [configuration: "compile", dependency: project(modules.moduleTools)],
-            [configuration: "compile", dependency: project(modules.moduleFirebase)],
-            [configuration: "compile", dependency: project(modules.moduleCache)],
-            [configuration: "compile", dependency: androidLibs.appCompat],
-            [configuration: "compile", dependency: androidLibs.constraintLayout],
-            [configuration: "compile", dependency: androidLibs.design],
-            [configuration: "compile", dependency: androidLibs.androidRx],
-            [configuration: "compile", dependency: androidLibs.archRuntime],
-            [configuration: "compile", dependency: androidLibs.archExtensions],
-            [configuration: "annotationProcessor", dependency: androidLibs.archCompiler],
-            [configuration: "compile", dependency: androidLibs.butterknife],
-            [configuration: "annotationProcessor", dependency: androidLibs.butterknifeCompiler],
-            [configuration: "testCompile", dependency: testLibs.junit],
-            [configuration: "androidTestCompile", dependency: testLibs.androidTestCompile,
-             options      : { exclude group: 'com.android.support', module: 'support-annotations' }],
-            [configuration: "compile", dependency: libs.dagger],
-            [configuration: "annotationProcessor", dependency: libs.daggerCompiler],
-            [configuration: "compile", dependency: androidLibs.daggerAndroidSupport,
-             options      : { exclude module: 'jsr305' }],
-            [configuration: "annotationProcessor", dependency: androidLibs.daggerAndroidProcessor],
-            [configuration: "compile", dependency: libs.firebaseDatabase],
-            [configuration: "compile", dependency: libs.firebaseStorage]
+            [configuration: impl, dependency: project(modules.interactor)],
+            [configuration: impl, dependency: project(modules.storage)],
+            [configuration: impl, dependency: project(modules.cache)],
+
+            [configuration: impl, dependency: libs.appCompat],
+            [configuration: impl, dependency: libs.constraintLayout],
+            [configuration: impl, dependency: libs.design],
+
+            [configuration: impl, dependency: libs.archRuntime],
+            [configuration: impl, dependency: libs.archExtensions],
+            [configuration: annotationProcessor, dependency: libs.archCompiler],
+
+            [configuration: impl, dependency: libs.androidRx],
+
+            [configuration: impl, dependency: libs.butterknife],
+            [configuration: annotationProcessor, dependency: libs.butterknifeCompiler],
+
+            [configuration: impl, dependency: libs.daggerAndroidSupport, options: { exclude module: 'jsr305' }],
+            [configuration: annotationProcessor, dependency: libs.daggerCompiler],
+            [configuration: annotationProcessor, dependency: libs.daggerAndroidProcessor],
+
+            [configuration: testImpl, dependency: testLibs.junit],
+
+            // androidTestCompile
+            [configuration: androidTestImpl, dependency: testLibs.androidTestCompile, options: {
+                exclude module: 'support-annotations'
+            }]
     ]
 
-    interactorsDependencies = [
-            [configuration: "compile", dependency: project(modules.moduleRepository)],
-            [configuration: "compile", dependency: libs.javaRx],
-            [configuration: "testCompile", dependency: testLibs.junit]
+    interactorDependencies = [
+            [configuration: impl, dependency: project(modules.repository)],
+
+            [configuration: testCompile, dependency: testLibs.junit]
     ]
 
     repositoryDependencies = [
-            [configuration: "compile", dependency: project(modules.moduleDomain)],
-            [configuration: "compile", dependency: libs.javaRx],
-            [configuration: "testCompile", dependency: testLibs.junit],
-            [configuration: "compile", dependency: libs.toothpick],
-            [configuration: "compile", dependency: libs.dagger]
+            [configuration: compile, dependency: project(modules.domain)],
+            [configuration: compile, dependency: libs.javaRx],
+            [configuration: compile, dependency: libs.dagger],
+
+            [configuration: testCompile, dependency: testLibs.junit]
     ]
 
     domainDependencies = [
-            [configuration: "compile", dependency: androidLibs.annotations],
+            [configuration: compile, dependency: libs.annotations],
     ]
 
-    firebaseDependencies = [
-            [configuration: "compile", dependency: project(modules.moduleDomain)],
-            [configuration: "compile", dependency: project(modules.moduleTools)],
-            [configuration: "compile", dependency: project(modules.moduleRepository)],
-            [configuration: "compile", dependency: libs.dagger],
-            [configuration: "compile", dependency: libs.firebaseDatabase]
+    storageDependencies = [
+            [configuration: api, dependency: project(modules.domain)],
+            [configuration: api, dependency: project(modules.tools)],
+            [configuration: api, dependency: project(modules.repository)],
+
+            [configuration: api, dependency: libs.dagger],
+
+            [configuration: api, dependency: libs.firebaseStorage],
+            [configuration: impl, dependency: libs.firebaseDatabase]
     ]
 
     cacheDependencies = [
-            [configuration: "compile", dependency: project(modules.moduleRepository)],
-            [configuration: "compile", dependency: libs.javaRx]
+            [configuration: impl, dependency: project(modules.repository)],
+
+            [configuration: impl, dependency: libs.javaRx]
     ]
 
     toolsDependencies = [
-            [configuration: "compile", dependency: androidLibs.annotations],
-            [configuration: "compile", dependency: libs.javaRx]
+            [configuration: compile, dependency: libs.annotations],
+
+            [configuration: compile, dependency: libs.javaRx]
     ]
 }
