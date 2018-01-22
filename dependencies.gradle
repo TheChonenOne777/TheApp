@@ -26,34 +26,36 @@ ext {
             cache     : ":cache"
     ]
     def libs = [
-            appCompat             : [group: 'com.android.support', name: 'appcompat-v7', version: versionAndroidSDK],
-            annotations           : [group: 'com.android.support', name: 'support-annotations', version: versionAndroidSDK],
-            constraintLayout      : [group: 'com.android.support.constraint', name: 'constraint-layout', version: versionConstraintLayout],
-            design                : [group: 'com.android.support', name: 'design', version: versionAndroidSDK],
+            appCompat             : "com.android.support:appcompat-v7:${versionAndroidSDK}",
+            annotations           : "com.android.support:support-annotations:${versionAndroidSDK}",
+            constraintLayout      : "com.android.support.constraint:constraint-layout:${versionConstraintLayout}",
+            design                : "com.android.support:design:${versionAndroidSDK}",
 
-            archRuntime           : [group: 'android.arch.lifecycle', name: 'runtime', version: versionArchRuntime],
-            archExtensions        : [group: 'android.arch.lifecycle', name: 'extensions', version: versionArch],
-            archCompiler          : [group: 'android.arch.lifecycle', name: 'compiler', version: versionArch],
+            archRuntime           : "android.arch.lifecycle:runtime:${versionArchRuntime}",
+            archExtensions        : "android.arch.lifecycle:extensions:${versionArch}",
+            archCompiler          : "android.arch.lifecycle:compiler:${versionArch}",
 
-            javaRx                : [group: 'io.reactivex.rxjava2', name: 'rxjava', version: versionJavaRx],
-            androidRx             : [group: 'io.reactivex.rxjava2', name: 'rxandroid', version: versionAndroidRx],
+            javaRx                : "io.reactivex.rxjava2:rxjava:${versionJavaRx}",
+            androidRx             : "io.reactivex.rxjava2:rxandroid:${versionAndroidRx}",
 
-            dagger                : [group: 'com.google.dagger', name: 'dagger', version: versionDagger],
-            daggerCompiler        : [group: 'com.google.dagger', name: 'dagger-compiler', version: versionDagger],
-            daggerAndroidSupport  : [group: 'com.google.dagger', name: 'dagger-android-support', version: versionDagger],
-            daggerAndroidProcessor: [group: 'com.google.dagger', name: 'dagger-android-processor', version: versionDagger],
+            dagger                : "com.google.dagger:dagger:${versionDagger}",
+            daggerCompiler        : "com.google.dagger:dagger-compiler:${versionDagger}",
+            daggerAndroidSupport  : "com.google.dagger:dagger-android-support:${versionDagger}",
+            daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:${versionDagger}",
 
-            firebaseDatabase      : [group: 'com.google.firebase', name: 'firebase-database', version: versionFirebase],
-            firebaseStorage       : [group: 'com.google.firebase', name: 'firebase-storage', version: versionFirebase],
+            firebaseDatabase      : "com.google.firebase:firebase-database:${versionFirebase}",
+            firebaseStorage       : "com.google.firebase:firebase-storage:${versionFirebase}",
 
-            butterknife           : [group: 'com.jakewharton', name: 'butterknife', version: versionButterknife],
-            butterknifeCompiler   : [group: 'com.jakewharton', name: 'butterknife-compiler', version: versionButterknifeCompiler]
+            butterknife           : "com.jakewharton:butterknife:${versionButterknife}",
+            butterknifeCompiler   : "com.jakewharton:butterknife-compiler:${versionButterknifeCompiler}",
+
+            kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}"
 
     ]
 
     testLibs = [
-            junit             : [group: 'junit', name: 'junit', version: versionJUnit],
-            androidTestCompile: [group: 'com.android.support.test.espresso', name: 'espresso-core', version: versionEspressoCore]
+            junit             : "junit:junit:${versionJUnit}",
+            androidTestCompile: "com.android.support.test.espresso:espresso-core:${versionEspressoCore}"
     ]
 
     def compile = 'compile'
@@ -86,6 +88,9 @@ ext {
             [configuration: annotationProcessor, dependency: libs.daggerCompiler],
             [configuration: annotationProcessor, dependency: libs.daggerAndroidProcessor],
 
+            // won't compile with unable to merge dex error
+            [configuration: impl, dependency: libs.firebaseStorage],
+
             [configuration: testImpl, dependency: testLibs.junit],
 
             // androidTestCompile
@@ -110,6 +115,7 @@ ext {
 
     domainDependencies = [
             [configuration: compile, dependency: libs.annotations],
+            [configuration: compile, dependency: libs.kotlin]
     ]
 
     storageDependencies = [
@@ -119,7 +125,6 @@ ext {
 
             [configuration: api, dependency: libs.dagger],
 
-            [configuration: api, dependency: libs.firebaseStorage],
             [configuration: impl, dependency: libs.firebaseDatabase]
     ]
 
@@ -132,6 +137,8 @@ ext {
     toolsDependencies = [
             [configuration: compile, dependency: libs.annotations],
 
-            [configuration: compile, dependency: libs.javaRx]
+            [configuration: compile, dependency: libs.javaRx],
+
+            [configuration: compile, dependency: libs.kotlin]
     ]
 }

@@ -6,9 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/cache/cache.iml" filepath="$PROJECT_DIR$/cache/cache.iml" />
       <module fileurl="file://$PROJECT_DIR$/domain/domain.iml" filepath="$PROJECT_DIR$/domain/domain.iml" />
-      <module fileurl="file://C:\Users\admin\StudioProjects\TheApp\storage\firebase.iml" filepath="C:\Users\admin\StudioProjects\TheApp\storage\firebase.iml" />
       <module fileurl="file://$PROJECT_DIR$/interactor/interactor.iml" filepath="$PROJECT_DIR$/interactor/interactor.iml" />
-      <module fileurl="file://C:\Users\admin\StudioProjects\TheApp\interactor\interactors.iml" filepath="C:\Users\admin\StudioProjects\TheApp\interactor\interactors.iml" />
       <module fileurl="file://$PROJECT_DIR$/repository/repository.iml" filepath="$PROJECT_DIR$/repository/repository.iml" />
       <module fileurl="file://$PROJECT_DIR$/storage/storage.iml" filepath="$PROJECT_DIR$/storage/storage.iml" />
       <module fileurl="file://$PROJECT_DIR$/tools/tools.iml" filepath="$PROJECT_DIR$/tools/tools.iml" />
