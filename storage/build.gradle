@@ -9,6 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -23,7 +24,7 @@ android {
 }
 
 dependencies {
-    rootProject.ext.firebaseDependencies.each {
+    rootProject.ext.storageDependencies.each {
         add(it.configuration, it.dependency, it.options)
     }
 }

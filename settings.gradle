@@ -1,1 +1,1 @@
-include ':app', ':domain', ':interactors', ':repository', ':tools', ':firebase', ':cache'
+include ':app', ':domain', ':interactor', ':repository', ':tools', ':storage', ':cache'
