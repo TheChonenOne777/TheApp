@@ -86,6 +86,9 @@ ext {
             [configuration: annotationProcessor, dependency: libs.daggerCompiler],
             [configuration: annotationProcessor, dependency: libs.daggerAndroidProcessor],
 
+            // won't compile with unable to merge dex error
+            [configuration: impl, dependency: libs.firebaseStorage],
+
             [configuration: testImpl, dependency: testLibs.junit],
 
             // androidTestCompile
@@ -119,7 +122,6 @@ ext {
 
             [configuration: api, dependency: libs.dagger],
 
-            [configuration: api, dependency: libs.firebaseStorage],
             [configuration: impl, dependency: libs.firebaseDatabase]
     ]
 
