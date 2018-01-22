@@ -1,10 +1,9 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion project.property('compileSdkVersion')
     buildToolsVersion project.property('buildToolsVersion')
     defaultConfig {
-        applicationId "com.admin.theapp"
         minSdkVersion project.property('minSdkVersion')
         targetSdkVersion project.property('targetSdkVersion')
         versionCode 1
@@ -25,9 +24,7 @@ android {
 }
 
 dependencies {
-    rootProject.ext.appDependencies.each {
+    rootProject.ext.storageDependencies.each {
         add(it.configuration, it.dependency, it.options)
     }
 }
-
-apply plugin: 'com.google.gms.google-services'

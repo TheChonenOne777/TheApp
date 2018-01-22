@@ -17,9 +17,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Maybe;
 import io.reactivex.Observable;
-import io.reactivex.subjects.PublishSubject;
+import io.reactivex.subjects.BehaviorSubject;
 
 public class FirebaseDatabase implements Firebase {
 
@@ -31,12 +30,10 @@ public class FirebaseDatabase implements Firebase {
     @NonNull
     private final FirebaseHotelModelToHotelMapper mapper;
 
-    private List<FirebaseHotelModel> tempStorage; // TODO: 1/11/2018 to be replaced or removed
-
     @NonNull
-    private final PublishSubject<List<FirebaseHotelModel>> hotelsPublisher   = PublishSubject.create();
+    private final BehaviorSubject<List<FirebaseHotelModel>> hotelsPublisher   = BehaviorSubject.create();
     @NonNull
-    private final DatabaseReference                        hotelsDbReference = com.google.firebase.database.FirebaseDatabase.getInstance().getReference("Hotels");
+    private final DatabaseReference                         hotelsDbReference = com.google.firebase.database.FirebaseDatabase.getInstance().getReference("Hotels");
 
     @NonNull
     private final ValueEventListener hotelsValueListener = new ValueEventListener() {
@@ -47,7 +44,6 @@ public class FirebaseDatabase implements Firebase {
             if (list != null) {
                 hotelsPublisher.onNext(list);
             }
-            tempStorage = list;
         }
 
         @Override
@@ -73,15 +69,10 @@ public class FirebaseDatabase implements Firebase {
 
     @NonNull
     @Override
-    public Maybe<Hotel> getHotelById(long id) {
-        if (tempStorage == null) {
-            return Maybe.empty();
-        }
-        for (FirebaseHotelModel hotelModel : tempStorage) {
-            if (hotelModel.getId() == id) {
-                return Maybe.fromCallable(() -> hotelModel).map(mapper::map);
-            }
-        }
-        return Maybe.empty();
+    public Observable<Hotel> getHotelById(long id) {
+        return hotelsPublisher.flatMapIterable(hotels -> hotels)
+                              .filter(hotel -> hotel.getId() == id)
+                              .flatMap(h -> Observable.fromCallable(() -> h))
+                              .map(mapper::map);
     }
 }
