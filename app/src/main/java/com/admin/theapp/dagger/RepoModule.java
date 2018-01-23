@@ -1,11 +1,13 @@
 package com.admin.theapp.dagger;
 
 import com.admin.theapp.Hotel;
-import com.admin.theapp.firebase.FirebaseDatabase;
+import com.admin.theapp.firebase.FirebaseDatabaseImpl;
+import com.admin.theapp.firebase.FirebaseStorageImpl;
 import com.admin.theapp.utils.Constants;
 import com.theapp.Cache;
 import com.theapp.cache.HotelsCache;
-import com.theapp.repository.Firebase;
+import com.theapp.repository.FirebaseDatabase;
+import com.theapp.repository.FirebaseStorage;
 
 import javax.inject.Singleton;
 
@@ -17,7 +19,11 @@ import dagger.Provides;
 abstract class RepoModule {
     @Binds
     @Singleton
-    abstract Firebase provideFirebase(FirebaseDatabase firebaseDatabase);
+    abstract FirebaseDatabase provideFirebase(FirebaseDatabaseImpl firebaseDatabase);
+
+    @Binds
+    @Singleton
+    abstract FirebaseStorage provideFirebaseStorage(FirebaseStorageImpl firebaseStorage);
 
     @Provides
     @Singleton

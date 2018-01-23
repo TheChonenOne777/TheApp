@@ -6,13 +6,13 @@ import com.admin.theapp.Hotel;
 
 import java.util.List;
 
-import io.reactivex.Observable;
+import io.reactivex.Maybe;
 
 
-public interface Firebase {
+public interface FirebaseDatabase {
     @NonNull
-    Observable<List<Hotel>> getHotels();
+    Maybe<List<Hotel>> getHotels();
 
     @NonNull
-    Observable<Hotel> getHotelById(long id);
+    Maybe<Hotel> getHotelById(long id);
 }
