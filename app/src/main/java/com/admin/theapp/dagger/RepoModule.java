@@ -19,7 +19,7 @@ import dagger.Provides;
 abstract class RepoModule {
     @Binds
     @Singleton
-    abstract FirebaseDatabase provideFirebase(FirebaseDatabaseImpl firebaseDatabase);
+    abstract FirebaseDatabase provideFirebaseDatabase(FirebaseDatabaseImpl firebaseDatabase);
 
     @Binds
     @Singleton

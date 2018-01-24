@@ -50,7 +50,7 @@ ext {
             butterknife           : "com.jakewharton:butterknife:${versionButterknife}",
             butterknifeCompiler   : "com.jakewharton:butterknife-compiler:${versionButterknifeCompiler}",
 
-            kotlin                : "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+            kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     ]
 
     testLibs = [
@@ -127,7 +127,7 @@ ext {
             //what does it mean to add a dependency with explicit version, so compile and runtime have both the same version
             [configuration: api, dependency: libs.firebaseDatabase],
             [configuration: api, dependency: libs.firebaseStorage],
-            [configuration: api, dependency: libs.firebaseCore],
+            [configuration: api, dependency: libs.firebaseCore]
     ]
 
     cacheDependencies = [

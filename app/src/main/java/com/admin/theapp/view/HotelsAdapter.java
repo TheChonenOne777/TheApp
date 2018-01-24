@@ -1,12 +1,9 @@
 package com.admin.theapp.view;
 
 import android.content.Context;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.admin.theapp.R;
+import com.admin.theapp.interactors.DataInteractor;
 import com.admin.theapp.model.HotelModel;
-import com.google.firebase.storage.StorageReference;
+import com.admin.theapp.utils.Decoder;
+import com.theapp.tools.adapters.DisposableMaybeObserverAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,17 +26,23 @@ public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelViewH
     private static final String PATH_TO_IMAGE = "hotels/";
     private static final long   ONE_MEGABYTE  = 1024 * 1024;
 
+    @NonNull
+    private final Context        context;
+    @NonNull
+    private final Decoder        decoder;
+    @NonNull
+    private final DataInteractor dataInteractor;
+
     @Nullable
     private ItemClickListener onClickCallback;
-    @NonNull
-    private Context           context;
 
     @Inject
-    StorageReference storageReference; // TODO: 1/11/2018 remove storage reference from here
-
-    @Inject
-    HotelsAdapter(@NonNull Context context) {
+    HotelsAdapter(@NonNull Context context,
+                  @NonNull Decoder decoder,
+                  @NonNull DataInteractor dataInteractor) {
         this.context = context;
+        this.decoder = decoder;
+        this.dataInteractor = dataInteractor;
     }
 
     @NonNull
@@ -62,16 +67,13 @@ public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelViewH
         holder.address.setText(hotelModel.getAddress());
         holder.stars.setText(String.valueOf(hotelModel.getStars()));
         if (hotelModel.getImageName() != null) {
-            setImageToHolder(hotelModel.getImageName(), holder);
+            dataInteractor.getBytes(hotelModel.getImageName()).subscribe(new DisposableMaybeObserverAdapter<byte[]>() {
+                @Override
+                public void onSuccess(@NonNull byte[] bytes) {
+                    holder.image.setImageDrawable(decoder.decode(bytes));
+                }
+            });
         }
-    }
-
-    private void setImageToHolder(@NonNull String imageName, @NonNull HotelViewHolder holder) {
-        storageReference.child(PATH_TO_IMAGE + imageName)
-                        .getBytes(ONE_MEGABYTE)
-                        .addOnSuccessListener(bytes -> holder.image.setImageDrawable(new BitmapDrawable(
-                                context.getResources(), BitmapFactory.decodeByteArray(bytes, 0, bytes.length))
-                        )).addOnFailureListener(e -> Log.e("Failed to load image: ", e.getMessage()));
     }
 
     @NonNull
