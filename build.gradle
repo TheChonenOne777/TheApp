@@ -2,7 +2,7 @@
 apply plugin: 'kotlin'
 
 buildscript {
-    ext.kotlin_version = '1.2.20'
+    ext.kotlin_version = '1.2.21'
     repositories {
         jcenter()
         google()
@@ -32,7 +32,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 compileKotlin {
     kotlinOptions {
