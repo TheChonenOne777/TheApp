@@ -12,7 +12,7 @@ import com.admin.theapp.interactors.DataInteractor;
 import com.admin.theapp.model.HotelModel;
 import com.admin.theapp.utils.mappers.HotelToHotelModelMapper;
 import com.theapp.tools.Logger;
-import com.theapp.tools.adapters.DisposableObserverAdapter;
+import com.theapp.tools.adapters.DisposableMaybeObserverAdapter;
 
 import java.util.List;
 
@@ -28,6 +28,14 @@ public class HotelsViewModel extends BaseViewModel {
     @NonNull
     private final MutableLiveData<List<HotelModel>> hotels = new MutableLiveData<>();
 
+    @NonNull
+    private final DisposableMaybeObserverAdapter<List<Hotel>> hotelsObservable = new DisposableMaybeObserverAdapter<List<Hotel>>() {
+        @Override
+        public void onSuccess(@NonNull List<Hotel> hotelList) {
+            hotels.setValue(mapper.map(hotelList));
+        }
+    };
+
     @Inject
     HotelsViewModel(@NonNull HotelsApp application,
                     @NonNull Logger logger,
@@ -40,12 +48,7 @@ public class HotelsViewModel extends BaseViewModel {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     void onCreate() {
-        execute(interactor.getHotels(), new DisposableObserverAdapter<List<Hotel>>() {
-            @Override
-            public void onNext(@NonNull List<Hotel> hotelList) {
-                hotels.setValue(mapper.map(hotelList));
-            }
-        });
+        execute(interactor.getHotels(), hotelsObservable);
     }
 
     @NonNull

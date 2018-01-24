@@ -45,12 +45,12 @@ ext {
 
             firebaseDatabase      : "com.google.firebase:firebase-database:${versionFirebase}",
             firebaseStorage       : "com.google.firebase:firebase-storage:${versionFirebase}",
+            firebaseCore          : "com.google.firebase:firebase-core:${versionFirebase}",
 
             butterknife           : "com.jakewharton:butterknife:${versionButterknife}",
             butterknifeCompiler   : "com.jakewharton:butterknife-compiler:${versionButterknifeCompiler}",
 
-            kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlin_version}"
-
+            kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     ]
 
     testLibs = [
@@ -88,9 +88,6 @@ ext {
             [configuration: annotationProcessor, dependency: libs.daggerCompiler],
             [configuration: annotationProcessor, dependency: libs.daggerAndroidProcessor],
 
-            // won't compile with unable to merge dex error
-            [configuration: impl, dependency: libs.firebaseStorage],
-
             [configuration: testImpl, dependency: testLibs.junit],
 
             // androidTestCompile
@@ -107,6 +104,8 @@ ext {
 
     repositoryDependencies = [
             [configuration: compile, dependency: project(modules.domain)],
+            [configuration: compile, dependency: project(modules.tools)],
+
             [configuration: compile, dependency: libs.javaRx],
             [configuration: compile, dependency: libs.dagger],
 
@@ -115,17 +114,20 @@ ext {
 
     domainDependencies = [
             [configuration: compile, dependency: libs.annotations],
+
             [configuration: compile, dependency: libs.kotlin]
     ]
 
     storageDependencies = [
             [configuration: api, dependency: project(modules.domain)],
-            [configuration: api, dependency: project(modules.tools)],
             [configuration: api, dependency: project(modules.repository)],
 
             [configuration: api, dependency: libs.dagger],
 
-            [configuration: impl, dependency: libs.firebaseDatabase]
+            //what does it mean to add a dependency with explicit version, so compile and runtime have both the same version
+            [configuration: api, dependency: libs.firebaseDatabase],
+            [configuration: api, dependency: libs.firebaseStorage],
+            [configuration: api, dependency: libs.firebaseCore]
     ]
 
     cacheDependencies = [

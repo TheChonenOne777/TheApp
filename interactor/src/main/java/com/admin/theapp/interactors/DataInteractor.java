@@ -11,7 +11,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Maybe;
-import io.reactivex.Observable;
 
 @Singleton
 public class DataInteractor {
@@ -29,7 +28,12 @@ public class DataInteractor {
     }
 
     @NonNull
-    public Observable<List<Hotel>> getHotels() {
+    public Maybe<List<Hotel>> getHotels() {
         return hotelsRepo.getHotels();
+    }
+
+    @NonNull
+    public Maybe<byte[]> getBytes(@NonNull String name){
+        return hotelsRepo.getBytes(name);
     }
 }
