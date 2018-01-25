@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Stars view-->
+    <declare-styleable name="StarsView">
+        <attr name="stars" format="float" />
+    </declare-styleable>
+</resources>
