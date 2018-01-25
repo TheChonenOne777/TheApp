@@ -7,4 +7,6 @@
     <string name="hotel_details_suites_availability">Suites available: %1$s</string>
     <string name="hotel_details_lat">Latitude: %1$.14f</string>
     <string name="hotel_details_lon">Longitude: %1$.14f</string>
+    <string name="star_view_not_rated_text">Not rated yet</string>
+    <string name="hotel_does_not_exist_text">Hotel does not exist</string>
 </resources>

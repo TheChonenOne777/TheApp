@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="stars_view_margin_start">8dp</dimen>
+    <dimen name="star_view_height">24dp</dimen>
+</resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -27,29 +28,27 @@
             android:id="@+id/hotel_details_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
-            android:paddingBottom="4dp"
             android:textSize="18sp"
             tools:text="address" />
 
-        <TextView
+        <com.admin.theapp.ui.widget.StarsView
             android:id="@+id/hotel_details_stars"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp"
             android:paddingBottom="4dp"
-            android:textSize="18sp"
-            tools:text="stars" />
+            android:paddingEnd="8dp"
+            android:paddingStart="8dp" />
 
         <TextView
             android:id="@+id/hotel_details_distance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
-            android:paddingBottom="4dp"
             android:textSize="14sp"
             tools:text="distance" />
 
@@ -57,18 +56,18 @@
             android:id="@+id/hotel_details_suites_availability"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
-            android:paddingBottom="4dp"
             android:textSize="14sp"
             tools:text="suites_availability" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
-            android:paddingBottom="4dp"
             android:text="@string/hotel_details_coordinates"
             android:textSize="14sp" />
 
@@ -76,9 +75,9 @@
             android:id="@+id/hotel_details_lat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="4dp"
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
-            android:paddingBottom="4dp"
             android:textSize="14sp"
             tools:text="lat" />
 
@@ -86,9 +85,9 @@
             android:id="@+id/hotel_details_lon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
             android:paddingEnd="8dp"
             android:paddingStart="8dp"
-            android:paddingBottom="8dp"
             android:textSize="14sp"
             tools:text="lon" />
 

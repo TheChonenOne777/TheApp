@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.admin.theapp.R;
 import com.admin.theapp.base.BaseActivity;
+import com.admin.theapp.ui.widget.StarsView;
 import com.admin.theapp.viewmodel.HotelDetailsViewModel;
 import com.theapp.entities.HotelModel;
 
@@ -18,7 +19,7 @@ import butterknife.BindView;
 
 public class HotelDetailsActivity extends BaseActivity<HotelDetailsViewModel> {
 
-    private static final int    DEFAULT_ACTIVITY_RESULT_HOTEL_ID = -1;
+    private static final int DEFAULT_ACTIVITY_RESULT_HOTEL_ID = -1;
 
     @BindView(R.id.hotel_details_image)
     ImageView image;
@@ -27,7 +28,7 @@ public class HotelDetailsActivity extends BaseActivity<HotelDetailsViewModel> {
     @BindView(R.id.hotel_details_address)
     TextView  address;
     @BindView(R.id.hotel_details_stars)
-    TextView  stars;
+    StarsView stars;
     @BindView(R.id.hotel_details_distance)
     TextView  distance;
     @BindView(R.id.hotel_details_suites_availability)
@@ -42,7 +43,7 @@ public class HotelDetailsActivity extends BaseActivity<HotelDetailsViewModel> {
         if (hotelModel != null) {
             name.setText(hotelModel.getName());
             address.setText(hotelModel.getAddress());
-            stars.setText(String.valueOf(hotelModel.getStars()));
+            stars.setStars(hotelModel.getStars());
             distance.setText(String.valueOf(hotelModel.getDistance()));
             suites_availability.setText(hotelModel.getSuitesAvailability());
             lat.setText(String.valueOf(hotelModel.getLat()));
@@ -62,7 +63,7 @@ public class HotelDetailsActivity extends BaseActivity<HotelDetailsViewModel> {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         final long hotelId = getIntent().getLongExtra(HotelsActivity.HOTEL_DETAILS_ACTIVITY_EXTRA, DEFAULT_ACTIVITY_RESULT_HOTEL_ID);
         if (hotelId == DEFAULT_ACTIVITY_RESULT_HOTEL_ID) {
-            Toast.makeText(this, "Hotel does not exist", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.hotel_does_not_exist_text, Toast.LENGTH_SHORT).show();
             this.finish();
         }
         viewModel.retrieveHotelModel(hotelId);
