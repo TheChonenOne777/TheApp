@@ -11,8 +11,8 @@ import android.widget.Toast;
 
 import com.admin.theapp.R;
 import com.admin.theapp.base.BaseActivity;
-import com.admin.theapp.model.HotelModel;
 import com.admin.theapp.viewmodel.HotelDetailsViewModel;
+import com.theapp.entities.HotelModel;
 
 import butterknife.BindView;
 

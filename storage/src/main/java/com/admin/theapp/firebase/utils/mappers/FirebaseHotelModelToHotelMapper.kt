@@ -1,9 +1,8 @@
 package com.admin.theapp.firebase.utils.mappers
 
 import com.admin.theapp.Hotel
-import com.admin.theapp.firebase.model.FirebaseHotelModel
+import com.theapp.entities.FirebaseHotelModel
 import com.theapp.tools.Mapper
-
 import javax.inject.Inject
 import javax.inject.Singleton
 

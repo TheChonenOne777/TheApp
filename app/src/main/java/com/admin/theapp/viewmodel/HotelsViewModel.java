@@ -9,8 +9,8 @@ import com.admin.theapp.Hotel;
 import com.admin.theapp.HotelsApp;
 import com.admin.theapp.base.BaseViewModel;
 import com.admin.theapp.interactors.DataInteractor;
-import com.admin.theapp.model.HotelModel;
 import com.admin.theapp.utils.mappers.HotelToHotelModelMapper;
+import com.theapp.entities.HotelModel;
 import com.theapp.tools.Logger;
 import com.theapp.tools.adapters.DisposableMaybeObserverAdapter;
 

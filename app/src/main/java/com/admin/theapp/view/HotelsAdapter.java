@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import com.admin.theapp.R;
 import com.admin.theapp.interactors.DataInteractor;
-import com.admin.theapp.model.HotelModel;
 import com.admin.theapp.utils.Decoder;
+import com.theapp.entities.HotelModel;
 import com.theapp.tools.adapters.DisposableMaybeObserverAdapter;
 
 import java.util.ArrayList;
