@@ -1,4 +1,4 @@
-package com.admin.theapp.model
+package com.theapp.entities
 
 data class HotelModel(val id: Long,
                  val name: String,

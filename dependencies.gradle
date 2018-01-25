@@ -23,7 +23,8 @@ ext {
             repository: ":repository",
             tools     : ":tools",
             storage   : ":storage",
-            cache     : ":cache"
+            cache     : ":cache",
+            entities  : ":entities"
     ]
     def libs = [
             appCompat             : "com.android.support:appcompat-v7:${versionAndroidSDK}",
@@ -65,6 +66,7 @@ ext {
     def testCompile = 'testCompile'
     def androidTestImpl = 'androidTestImplementation'
     def annotationProcessor = 'annotationProcessor'
+    def entities = 'entities'
 
     appDependencies = [
             [configuration: impl, dependency: project(modules.interactor)],
@@ -118,9 +120,16 @@ ext {
             [configuration: compile, dependency: libs.kotlin]
     ]
 
+    entitiesDependencies = [
+            [configuration: impl, dependency: libs.firebaseDatabase],
+
+            [configuration: impl, dependency: libs.kotlin]
+    ]
+
     storageDependencies = [
             [configuration: api, dependency: project(modules.domain)],
             [configuration: api, dependency: project(modules.repository)],
+            [configuration: api, dependency: project(modules.entities)],
 
             [configuration: api, dependency: libs.dagger],
 

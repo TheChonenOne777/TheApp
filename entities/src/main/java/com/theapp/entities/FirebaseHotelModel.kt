@@ -1,4 +1,4 @@
-package com.admin.theapp.firebase.model
+package com.theapp.entities
 
 import com.google.firebase.database.IgnoreExtraProperties
 
