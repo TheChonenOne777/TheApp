@@ -49,7 +49,7 @@ public class HotelsActivity extends BaseActivity<HotelsViewModel> implements Hot
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.hotels_layout;
+        return R.layout.hotels_list;
     }
 
     @NonNull

@@ -18,7 +18,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Maybe;
-import io.reactivex.functions.Function;
 import io.reactivex.subjects.BehaviorSubject;
 
 public class FirebaseDatabaseImpl implements FirebaseDatabase {
@@ -64,12 +63,7 @@ public class FirebaseDatabaseImpl implements FirebaseDatabase {
     @Override
     public Maybe<List<Hotel>> getHotels() {
         return hotelsPublisher.flatMapMaybe(hotels -> Maybe.fromCallable(() -> hotels))
-                              .map(new Function<List<FirebaseHotelModel>, List<Hotel>>() {
-                                  @Override
-                                  public List<Hotel> apply(List<FirebaseHotelModel> from) throws Exception {
-                                      return mapper.map(from);
-                                  }
-                              })
+                              .map(mapper::map)
                               .firstElement();
     }
 

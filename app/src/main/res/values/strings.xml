@@ -9,4 +9,5 @@
     <string name="hotel_details_lon">Longitude: %1$.14f</string>
     <string name="star_view_not_rated_text">Not rated yet</string>
     <string name="hotel_does_not_exist_text">Hotel does not exist</string>
+    <string name="hotel_item_image_content_desc">Hotel Image</string>
 </resources>
