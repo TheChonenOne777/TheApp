@@ -2,8 +2,9 @@ package com.admin.theapp.firebase;
 
 import android.support.annotation.NonNull;
 
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.theapp.repository.FirebaseStorage;
+import com.theapp.repository.Storage;
 import com.theapp.tools.Logger;
 
 import javax.inject.Inject;
@@ -11,14 +12,14 @@ import javax.inject.Inject;
 import io.reactivex.Maybe;
 import io.reactivex.subjects.PublishSubject;
 
-public class FirebaseStorageImpl implements FirebaseStorage {
+public class FirebaseStorageImpl implements Storage {
 
     private static final String LOG_TAG       = FirebaseStorageImpl.class.getSimpleName();
     private static final String PATH_TO_IMAGE = "hotels/";
     private static final long   ONE_MEGABYTE  = 1024 * 1024;
 
     @NonNull
-    private final StorageReference storageReference = com.google.firebase.storage.FirebaseStorage.getInstance().getReference();
+    private final StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
     @NonNull
     private final Logger logger;

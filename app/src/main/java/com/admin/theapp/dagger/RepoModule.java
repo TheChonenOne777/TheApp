@@ -6,8 +6,8 @@ import com.admin.theapp.firebase.FirebaseStorageImpl;
 import com.admin.theapp.utils.Constants;
 import com.theapp.Cache;
 import com.theapp.cache.HotelsCache;
-import com.theapp.repository.FirebaseDatabase;
-import com.theapp.repository.FirebaseStorage;
+import com.theapp.repository.Database;
+import com.theapp.repository.Storage;
 
 import javax.inject.Singleton;
 
@@ -19,11 +19,11 @@ import dagger.Provides;
 abstract class RepoModule {
     @Binds
     @Singleton
-    abstract FirebaseDatabase provideFirebaseDatabase(FirebaseDatabaseImpl firebaseDatabase);
+    abstract Database provideFirebaseDatabase(FirebaseDatabaseImpl firebaseDatabase);
 
     @Binds
     @Singleton
-    abstract FirebaseStorage provideFirebaseStorage(FirebaseStorageImpl firebaseStorage);
+    abstract Storage provideFirebaseStorage(FirebaseStorageImpl firebaseStorage);
 
     @Provides
     @Singleton

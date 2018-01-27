@@ -9,7 +9,7 @@ import java.util.List;
 import io.reactivex.Maybe;
 
 
-public interface FirebaseDatabase {
+public interface Database {
     @NonNull
     Maybe<List<Hotel>> getHotels();
 

@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import io.reactivex.Maybe;
 
-public interface FirebaseStorage {
+public interface Storage {
     @NonNull
     Maybe<byte[]> getBytes(@NonNull String name);
 }
