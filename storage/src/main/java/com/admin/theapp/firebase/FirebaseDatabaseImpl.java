@@ -3,27 +3,26 @@ package com.admin.theapp.firebase;
 import android.support.annotation.NonNull;
 
 import com.admin.theapp.Hotel;
-import com.admin.theapp.firebase.model.FirebaseHotelModel;
 import com.admin.theapp.firebase.utils.mappers.FirebaseHotelModelToHotelMapper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
-import com.theapp.repository.Firebase;
+import com.theapp.entities.FirebaseHotelModel;
+import com.theapp.repository.FirebaseDatabase;
 import com.theapp.tools.Logger;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
+import io.reactivex.Maybe;
 import io.reactivex.subjects.BehaviorSubject;
 
-public class FirebaseDatabase implements Firebase {
+public class FirebaseDatabaseImpl implements FirebaseDatabase {
 
-    @NonNull
-    private static final String LOG_TAG = FirebaseDatabase.class.getSimpleName();
+    private static final String LOG_TAG = FirebaseDatabaseImpl.class.getSimpleName();
 
     @NonNull
     private final Logger                          logger;
@@ -53,8 +52,8 @@ public class FirebaseDatabase implements Firebase {
     };
 
     @Inject
-    FirebaseDatabase(@NonNull Logger logger,
-                     @NonNull FirebaseHotelModelToHotelMapper mapper) {
+    FirebaseDatabaseImpl(@NonNull Logger logger,
+                         @NonNull FirebaseHotelModelToHotelMapper mapper) {
         this.logger = logger;
         this.mapper = mapper;
         hotelsDbReference.addListenerForSingleValueEvent(hotelsValueListener);
@@ -62,17 +61,18 @@ public class FirebaseDatabase implements Firebase {
 
     @NonNull
     @Override
-    public Observable<List<Hotel>> getHotels() {
-        return hotelsPublisher.flatMap(hotels -> Observable.fromCallable(() -> hotels))
-                              .map(mapper::map);
+    public Maybe<List<Hotel>> getHotels() {
+        return hotelsPublisher.flatMapMaybe(hotels -> Maybe.fromCallable(() -> hotels))
+                              .map(mapper::map)
+                              .firstElement();
     }
 
     @NonNull
     @Override
-    public Observable<Hotel> getHotelById(long id) {
+    public Maybe<Hotel> getHotelById(long id) {
         return hotelsPublisher.flatMapIterable(hotels -> hotels)
                               .filter(hotel -> hotel.getId() == id)
-                              .flatMap(h -> Observable.fromCallable(() -> h))
-                              .map(mapper::map);
+                              .map(mapper::map)
+                              .firstElement();
     }
 }

@@ -11,8 +11,8 @@ import android.support.v7.widget.RecyclerView;
 
 import com.admin.theapp.R;
 import com.admin.theapp.base.BaseActivity;
-import com.admin.theapp.model.HotelModel;
 import com.admin.theapp.viewmodel.HotelsViewModel;
+import com.theapp.entities.HotelModel;
 
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class HotelsActivity extends BaseActivity<HotelsViewModel> implements Hot
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.hotels_layout;
+        return R.layout.hotels_list;
     }
 
     @NonNull

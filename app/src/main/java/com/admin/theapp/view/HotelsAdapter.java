@@ -1,12 +1,9 @@
 package com.admin.theapp.view;
 
-import android.content.Context;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.admin.theapp.R;
-import com.admin.theapp.model.HotelModel;
-import com.google.firebase.storage.StorageReference;
+import com.admin.theapp.interactors.DataInteractor;
+import com.admin.theapp.ui.widget.StarsView;
+import com.admin.theapp.utils.Decoder;
+import com.theapp.entities.HotelModel;
+import com.theapp.tools.adapters.DisposableMaybeObserverAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,20 +24,19 @@ import javax.inject.Inject;
 
 public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelViewHolder> {
 
-    private static final String PATH_TO_IMAGE = "hotels/";
-    private static final long   ONE_MEGABYTE  = 1024 * 1024;
+    @NonNull
+    private final Decoder        decoder;
+    @NonNull
+    private final DataInteractor dataInteractor;
 
     @Nullable
     private ItemClickListener onClickCallback;
-    @NonNull
-    private Context           context;
 
     @Inject
-    StorageReference storageReference; // TODO: 1/11/2018 remove storage reference from here
-
-    @Inject
-    HotelsAdapter(@NonNull Context context) {
-        this.context = context;
+    HotelsAdapter(@NonNull Decoder decoder,
+                  @NonNull DataInteractor dataInteractor) {
+        this.decoder = decoder;
+        this.dataInteractor = dataInteractor;
     }
 
     @NonNull
@@ -60,18 +59,15 @@ public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelViewH
         HotelModel hotelModel = getHotelModel(position);
         holder.name.setText(hotelModel.getName());
         holder.address.setText(hotelModel.getAddress());
-        holder.stars.setText(String.valueOf(hotelModel.getStars()));
-        if (hotelModel.getImageName() != null) {
-            setImageToHolder(hotelModel.getImageName(), holder);
+        holder.stars.setStars(hotelModel.getStars());
+        if (!TextUtils.isEmpty(hotelModel.getImageName())) {
+            dataInteractor.getBytes(hotelModel.getImageName()).subscribe(new DisposableMaybeObserverAdapter<byte[]>() {
+                @Override
+                public void onSuccess(@NonNull byte[] bytes) {
+                    holder.image.setImageDrawable(decoder.decode(bytes));
+                }
+            });
         }
-    }
-
-    private void setImageToHolder(@NonNull String imageName, @NonNull HotelViewHolder holder) {
-        storageReference.child(PATH_TO_IMAGE + imageName)
-                        .getBytes(ONE_MEGABYTE)
-                        .addOnSuccessListener(bytes -> holder.image.setImageDrawable(new BitmapDrawable(
-                                context.getResources(), BitmapFactory.decodeByteArray(bytes, 0, bytes.length))
-                        )).addOnFailureListener(e -> Log.e("Failed to load image: ", e.getMessage()));
     }
 
     @NonNull
@@ -86,7 +82,7 @@ public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelViewH
 
     public void setData(@NonNull List<HotelModel> newList) {
         hotels = newList;
-        notifyDataSetChanged();
+        notifyItemRangeChanged(0, hotels.size());
     }
 
     void setOnClickCallback(@Nullable ItemClickListener onClickCallback) {
@@ -98,7 +94,7 @@ public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelViewH
         private final ImageView image;
         private final TextView  name;
         private final TextView  address;
-        private final TextView  stars;
+        private final StarsView stars;
 
         HotelViewHolder(@NonNull View view) {
             super(view);

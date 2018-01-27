@@ -8,8 +8,6 @@ import com.admin.theapp.HotelsApp;
 import com.admin.theapp.base.ViewModelFactory;
 import com.admin.theapp.logger.AppLogger;
 import com.admin.theapp.logger.ReleaseLogger;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.theapp.tools.Logger;
 
 import javax.inject.Singleton;
@@ -30,12 +28,6 @@ abstract class AppModule {
     @Singleton
     static ViewModelProvider.Factory provideViewModelFactory(ViewModelSubComponent.Builder viewModelSubComponent) {
         return new ViewModelFactory(viewModelSubComponent.build());
-    }
-
-    @Provides
-    @Singleton
-    static StorageReference provideStorageReference() {
-        return FirebaseStorage.getInstance().getReference();
     }
 
     @Provides

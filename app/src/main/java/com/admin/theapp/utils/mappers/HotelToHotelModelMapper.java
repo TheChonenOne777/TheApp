@@ -3,7 +3,7 @@ package com.admin.theapp.utils.mappers;
 import android.support.annotation.NonNull;
 
 import com.admin.theapp.Hotel;
-import com.admin.theapp.model.HotelModel;
+import com.theapp.entities.HotelModel;
 import com.theapp.tools.Mapper;
 
 import javax.inject.Inject;

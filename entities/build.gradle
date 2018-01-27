@@ -27,7 +27,7 @@ android {
 }
 
 dependencies {
-    rootProject.ext.storageDependencies.each {
+    rootProject.ext.entitiesDependencies.each {
         add(it.configuration, it.dependency, it.options)
     }
 }
