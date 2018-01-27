@@ -4,4 +4,5 @@
     <declare-styleable name="StarsView">
         <attr name="stars" format="float" />
     </declare-styleable>
+    <attr name="starsViewColor" format="color|reference" />
 </resources>
