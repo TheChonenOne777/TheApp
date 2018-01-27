@@ -7,10 +7,11 @@ import com.admin.theapp.firebase.utils.mappers.FirebaseHotelModelToHotelMapper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.theapp.entities.FirebaseHotelModel;
-import com.theapp.repository.FirebaseDatabase;
+import com.theapp.repository.Database;
 import com.theapp.tools.Logger;
 
 import java.util.List;
@@ -20,7 +21,7 @@ import javax.inject.Inject;
 import io.reactivex.Maybe;
 import io.reactivex.subjects.BehaviorSubject;
 
-public class FirebaseDatabaseImpl implements FirebaseDatabase {
+public class FirebaseDatabaseImpl implements Database {
 
     private static final String LOG_TAG = FirebaseDatabaseImpl.class.getSimpleName();
 
@@ -32,7 +33,7 @@ public class FirebaseDatabaseImpl implements FirebaseDatabase {
     @NonNull
     private final BehaviorSubject<List<FirebaseHotelModel>> hotelsPublisher   = BehaviorSubject.create();
     @NonNull
-    private final DatabaseReference                         hotelsDbReference = com.google.firebase.database.FirebaseDatabase.getInstance().getReference("Hotels");
+    private final DatabaseReference                         hotelsDbReference = FirebaseDatabase.getInstance().getReference("Hotels");
 
     @NonNull
     private final ValueEventListener hotelsValueListener = new ValueEventListener() {
