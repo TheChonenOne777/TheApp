@@ -36,8 +36,8 @@ public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatAct
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.base_activity_layout);
-        ViewStub viewStub = findViewById(R.id.main_viewstub);
+        setContentView(R.layout.base_activity);
+        final ViewStub viewStub = findViewById(R.id.main_viewstub);
         viewStub.setLayoutResource(getLayoutRes());
         viewStub.setVisibility(View.VISIBLE);
         ButterKnife.bind(this);
