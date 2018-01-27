@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!--palette-->
+    <color name="cyan_material_500">#00BCD4</color>
+    <color name="cyan_material_700">#0097A7</color>
+    <color name="orange_material_400">#FFA726</color>
+    <color name="amber_material_700">#FFA000</color>
+
+    <!--app colors-->
+    <color name="colorPrimary">@color/cyan_material_500</color>
+    <color name="colorPrimaryDark">@color/cyan_material_700</color>
+    <color name="colorAccent">@color/orange_material_400</color>
+
+    <!--stars view-->
+    <color name="starsViewColor">@color/amber_material_700</color>
 </resources>
