@@ -82,7 +82,7 @@ public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.HotelViewH
 
     public void setData(@NonNull List<HotelModel> newList) {
         hotels = newList;
-        notifyItemRangeChanged(0, hotels.size());
+        notifyDataSetChanged();
     }
 
     void setOnClickCallback(@Nullable ItemClickListener onClickCallback) {
