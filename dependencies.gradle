@@ -62,7 +62,7 @@ ext {
     def impl = 'implementation'
     def testImpl = 'testImplementation'
     def androidTestImpl = 'androidTestImplementation'
-    def annotationProcessor = 'annotationProcessor'
+    def apt = 'kapt'
 
     appDependencies = [
             [configuration: impl, dependency: project(modules.interactor)],
@@ -80,18 +80,20 @@ ext {
 
             [configuration: impl, dependency: libs.archRuntime],
             [configuration: impl, dependency: libs.archExtensions],
-            [configuration: annotationProcessor, dependency: libs.archCompiler],
+            [configuration: apt, dependency: libs.archCompiler],
 
             [configuration: impl, dependency: libs.javaRx],
             [configuration: impl, dependency: libs.androidRx],
 
             [configuration: impl, dependency: libs.butterknife],
-            [configuration: annotationProcessor, dependency: libs.butterknifeCompiler],
+            [configuration: apt, dependency: libs.butterknifeCompiler],
 
             [configuration: impl, dependency: libs.dagger],
             [configuration: impl, dependency: libs.daggerAndroidSupport, options: { exclude module: 'jsr305' }],
-            [configuration: annotationProcessor, dependency: libs.daggerCompiler],
-            [configuration: annotationProcessor, dependency: libs.daggerAndroidProcessor],
+            [configuration: apt, dependency: libs.daggerCompiler],
+            [configuration: apt, dependency: libs.daggerAndroidProcessor],
+
+            [configuration: impl, dependency: libs.firebaseCore],
 
             [configuration: impl, dependency: libs.kotlin],
 
@@ -138,8 +140,6 @@ ext {
     ]
 
     uimodelDependencies = [
-            [configuration: impl, dependency: libs.firebaseDatabase],
-
             [configuration: impl, dependency: libs.kotlin]
     ]
 

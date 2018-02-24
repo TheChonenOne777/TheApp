@@ -3,6 +3,7 @@ package com.admin.theapp.firebase;
 import android.support.annotation.NonNull;
 
 import com.admin.theapp.Hotel;
+import com.admin.theapp.firebase.entities.FirebaseHotelModel;
 import com.admin.theapp.firebase.utils.mappers.FirebaseHotelModelToHotelMapper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -10,7 +11,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
-import com.theapp.entities.FirebaseHotelModel;
 import com.theapp.repository.Database;
 import com.theapp.tools.Logger;
 

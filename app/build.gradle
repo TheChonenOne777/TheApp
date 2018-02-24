@@ -19,11 +19,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        debug {
-            minifyEnabled true
-            useProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -32,7 +27,7 @@ android {
 }
 
 dependencies {
-    rootProject.ext.uimodelDependencies.each {
+    rootProject.ext.appDependencies.each {
         add(it.configuration, it.dependency, it.options)
     }
 }

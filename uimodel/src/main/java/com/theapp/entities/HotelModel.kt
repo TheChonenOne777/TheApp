@@ -1,6 +1,6 @@
 package com.theapp.entities
 
-data class HotelModel(val id: Long,
+class HotelModel(val id: Long,
                  val name: String,
                  val address: String,
                  val stars: Double,

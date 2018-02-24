@@ -1,5 +1,7 @@
 package com.admin.theapp.dagger;
 
+import android.util.LruCache;
+
 import com.admin.theapp.Hotel;
 import com.admin.theapp.firebase.FirebaseDatabaseImpl;
 import com.admin.theapp.firebase.FirebaseStorageImpl;
@@ -28,6 +30,6 @@ abstract class RepoModule {
     @Provides
     @Singleton
     static Cache<Long, Hotel> provideHotelsCache() {
-        return new HotelsCache(Constants.HOTELS_CACHE_SIZE);
+        return new HotelsCache(new LruCache<>(Constants.HOTELS_CACHE_SIZE));
     }
 }
