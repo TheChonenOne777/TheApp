@@ -7,9 +7,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class FirebaseHotelModelToHotelMapper @Inject
-internal constructor()// for dagger2
-    : Mapper<FirebaseHotelModel, Hotel>() {
+class FirebaseHotelModelToHotelMapper @Inject internal constructor() : Mapper<FirebaseHotelModel, Hotel>() {
 
     override fun map(firebaseHotelModel: FirebaseHotelModel): Hotel {
         return Hotel(

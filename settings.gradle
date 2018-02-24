@@ -1,1 +1,1 @@
-include ':app', ':domain', ':interactor', ':repository', ':tools', ':storage', ':cache', ':entities'
+include ':app', ':domain', ':interactor', ':repository', ':tools', ':storage', ':cache', ':uimodel'

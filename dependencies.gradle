@@ -24,7 +24,7 @@ ext {
             tools     : ":tools",
             storage   : ":storage",
             cache     : ":cache",
-            entities  : ":entities"
+            uimodel   : ":uimodel"
     ]
     def libs = [
             appCompat             : "com.android.support:appcompat-v7:${versionAndroidSDK}",
@@ -59,36 +59,41 @@ ext {
             androidTestCompile: "com.android.support.test.espresso:espresso-core:${versionEspressoCore}"
     ]
 
-    def compile = 'compile'
-    def api = 'api'
     def impl = 'implementation'
     def testImpl = 'testImplementation'
-    def testCompile = 'testCompile'
     def androidTestImpl = 'androidTestImplementation'
     def annotationProcessor = 'annotationProcessor'
-    def entities = 'entities'
 
     appDependencies = [
             [configuration: impl, dependency: project(modules.interactor)],
             [configuration: impl, dependency: project(modules.storage)],
+            [configuration: impl, dependency: project(modules.repository)],
             [configuration: impl, dependency: project(modules.cache)],
+            [configuration: impl, dependency: project(modules.domain)],
+            [configuration: impl, dependency: project(modules.tools)],
+            [configuration: impl, dependency: project(modules.uimodel)],
 
             [configuration: impl, dependency: libs.appCompat],
             [configuration: impl, dependency: libs.constraintLayout],
             [configuration: impl, dependency: libs.design],
+            [configuration: impl, dependency: libs.annotations],
 
             [configuration: impl, dependency: libs.archRuntime],
             [configuration: impl, dependency: libs.archExtensions],
             [configuration: annotationProcessor, dependency: libs.archCompiler],
 
+            [configuration: impl, dependency: libs.javaRx],
             [configuration: impl, dependency: libs.androidRx],
 
             [configuration: impl, dependency: libs.butterknife],
             [configuration: annotationProcessor, dependency: libs.butterknifeCompiler],
 
+            [configuration: impl, dependency: libs.dagger],
             [configuration: impl, dependency: libs.daggerAndroidSupport, options: { exclude module: 'jsr305' }],
             [configuration: annotationProcessor, dependency: libs.daggerCompiler],
             [configuration: annotationProcessor, dependency: libs.daggerAndroidProcessor],
+
+            [configuration: impl, dependency: libs.kotlin],
 
             [configuration: testImpl, dependency: testLibs.junit],
 
@@ -100,56 +105,79 @@ ext {
 
     interactorDependencies = [
             [configuration: impl, dependency: project(modules.repository)],
+            [configuration: impl, dependency: project(modules.domain)],
 
-            [configuration: testCompile, dependency: testLibs.junit]
+            [configuration: impl, dependency: libs.annotations],
+
+            [configuration: impl, dependency: libs.javaRx],
+            [configuration: impl, dependency: libs.dagger],
+
+            [configuration: impl, dependency: libs.kotlin],
+
+            [configuration: testImpl, dependency: testLibs.junit]
     ]
 
     repositoryDependencies = [
-            [configuration: compile, dependency: project(modules.domain)],
-            [configuration: compile, dependency: project(modules.tools)],
+            [configuration: impl, dependency: project(modules.domain)],
+            [configuration: impl, dependency: project(modules.tools)],
 
-            [configuration: compile, dependency: libs.javaRx],
-            [configuration: compile, dependency: libs.dagger],
+            [configuration: impl, dependency: libs.annotations],
 
-            [configuration: testCompile, dependency: testLibs.junit]
+            [configuration: impl, dependency: libs.javaRx],
+            [configuration: impl, dependency: libs.dagger],
+
+            [configuration: impl, dependency: libs.kotlin],
+
+            [configuration: testImpl, dependency: testLibs.junit]
     ]
 
     domainDependencies = [
-            [configuration: compile, dependency: libs.annotations],
+            [configuration: impl, dependency: libs.annotations],
 
-            [configuration: compile, dependency: libs.kotlin]
+            [configuration: impl, dependency: libs.kotlin]
     ]
 
-    entitiesDependencies = [
+    uimodelDependencies = [
             [configuration: impl, dependency: libs.firebaseDatabase],
 
             [configuration: impl, dependency: libs.kotlin]
     ]
 
     storageDependencies = [
-            [configuration: api, dependency: project(modules.domain)],
-            [configuration: api, dependency: project(modules.repository)],
-            [configuration: api, dependency: project(modules.entities)],
+            [configuration: impl, dependency: project(modules.domain)],
+            [configuration: impl, dependency: project(modules.repository)],
+            [configuration: impl, dependency: project(modules.uimodel)],
+            [configuration: impl, dependency: project(modules.tools)],
 
-            [configuration: api, dependency: libs.dagger],
+            [configuration: impl, dependency: libs.annotations],
+
+            [configuration: impl, dependency: libs.javaRx],
+            [configuration: impl, dependency: libs.dagger],
 
             //what does it mean to add a dependency with explicit version, so compile and runtime have both the same version
-            [configuration: api, dependency: libs.firebaseDatabase],
-            [configuration: api, dependency: libs.firebaseStorage],
-            [configuration: api, dependency: libs.firebaseCore]
+            [configuration: impl, dependency: libs.firebaseDatabase],
+            [configuration: impl, dependency: libs.firebaseStorage],
+            [configuration: impl, dependency: libs.firebaseCore],
+
+            [configuration: impl, dependency: libs.kotlin]
     ]
 
     cacheDependencies = [
             [configuration: impl, dependency: project(modules.repository)],
+            [configuration: impl, dependency: project(modules.domain)],
 
-            [configuration: impl, dependency: libs.javaRx]
+            [configuration: impl, dependency: libs.annotations],
+
+            [configuration: impl, dependency: libs.javaRx],
+
+            [configuration: impl, dependency: libs.kotlin]
     ]
 
     toolsDependencies = [
-            [configuration: compile, dependency: libs.annotations],
+            [configuration: impl, dependency: libs.annotations],
 
-            [configuration: compile, dependency: libs.javaRx],
+            [configuration: impl, dependency: libs.javaRx],
 
-            [configuration: compile, dependency: libs.kotlin]
+            [configuration: impl, dependency: libs.kotlin]
     ]
 }

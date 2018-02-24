@@ -11,11 +11,11 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/cache" />
             <option value="$PROJECT_DIR$/domain" />
-            <option value="$PROJECT_DIR$/entities" />
             <option value="$PROJECT_DIR$/interactor" />
             <option value="$PROJECT_DIR$/repository" />
             <option value="$PROJECT_DIR$/storage" />
             <option value="$PROJECT_DIR$/tools" />
+            <option value="$PROJECT_DIR$/uimodel" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
