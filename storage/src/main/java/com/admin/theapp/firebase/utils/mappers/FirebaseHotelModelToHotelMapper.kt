@@ -9,15 +9,7 @@ import javax.inject.Singleton
 @Singleton
 class FirebaseHotelModelToHotelMapper @Inject constructor() : Mapper<FirebaseHotelModel, Hotel>() {
 
-    override fun map(from: FirebaseHotelModel) = Hotel(
-            from.id,
-            from.name,
-            from.address,
-            from.stars,
-            from.distance,
-            from.image,
-            from.suites_availability,
-            from.lat,
-            from.lon
-    )
+    override fun map(from: FirebaseHotelModel) =
+            Hotel(from.id, from.name, from.address, from.stars, from.distance,
+                    from.image, from.suites_availability, from.lat, from.lon)
 }

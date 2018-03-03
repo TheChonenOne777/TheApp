@@ -146,7 +146,6 @@ ext {
     storageDependencies = [
             [configuration: impl, dependency: project(modules.domain)],
             [configuration: impl, dependency: project(modules.repository)],
-            [configuration: impl, dependency: project(modules.uimodel)],
             [configuration: impl, dependency: project(modules.tools)],
 
             [configuration: impl, dependency: libs.annotations],
@@ -154,7 +153,6 @@ ext {
             [configuration: impl, dependency: libs.javaRx],
             [configuration: impl, dependency: libs.dagger],
 
-            //what does it mean to add a dependency with explicit version, so compile and runtime have both the same version
             [configuration: impl, dependency: libs.firebaseDatabase],
             [configuration: impl, dependency: libs.firebaseStorage],
             [configuration: impl, dependency: libs.firebaseCore],

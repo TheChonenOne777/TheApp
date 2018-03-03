@@ -26,6 +26,10 @@ import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * @deprecated Use {@link BaseViewModelNew}
+ */
+@Deprecated
 public abstract class BaseViewModel extends AndroidViewModel implements LifecycleObserver {
 
     @NonNull

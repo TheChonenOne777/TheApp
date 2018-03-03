@@ -16,6 +16,10 @@ import com.admin.theapp.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * @deprecated Use {@link android.widget.RatingBar}
+ * */
+@Deprecated
 public class StarsView extends LinearLayout {
 
     @BindView(R.id.stars_text)
