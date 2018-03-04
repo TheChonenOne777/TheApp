@@ -6,14 +6,14 @@ import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import com.admin.theapp.R
-import com.admin.theapp.base.BaseActivityNew
+import com.admin.theapp.base.BaseActivity
 import com.admin.theapp.utils.Constants
 import com.admin.theapp.viewmodel.HotelsViewModel
 import com.theapp.entities.HotelModel
 import kotlinx.android.synthetic.main.hotels_list.*
 import javax.inject.Inject
 
-class HotelsActivity : BaseActivityNew<HotelsViewModel>(), HotelsAdapter.ItemClickListener {
+class HotelsActivity : BaseActivity<HotelsViewModel>(), HotelsAdapter.ItemClickListener {
 
     override val vmClass = HotelsViewModel::class.java
 

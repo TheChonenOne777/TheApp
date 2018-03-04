@@ -10,7 +10,7 @@ import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.base_activity.*
 import javax.inject.Inject
 
-abstract class BaseActivityNew<T : BaseViewModelNew> : AppCompatActivity() {
+abstract class BaseActivity<T : BaseViewModel> : AppCompatActivity() {
 
     protected abstract val vmClass: Class<T>
 

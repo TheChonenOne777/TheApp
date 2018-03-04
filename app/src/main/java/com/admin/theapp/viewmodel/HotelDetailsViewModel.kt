@@ -2,7 +2,7 @@ package com.admin.theapp.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import android.graphics.drawable.BitmapDrawable
-import com.admin.theapp.base.BaseViewModelNew
+import com.admin.theapp.base.BaseViewModel
 import com.admin.theapp.interactors.DataInteractor
 import com.admin.theapp.utils.Decoder
 import com.admin.theapp.utils.mappers.HotelToHotelModelMapper
@@ -15,7 +15,7 @@ class HotelDetailsViewModel @Inject constructor(
         private val dataInteractor: DataInteractor,
         private val decoder: Decoder,
         private val hotelsMapper: HotelToHotelModelMapper
-) : BaseViewModelNew(logger) {
+) : BaseViewModel(logger) {
 
     val hotelModel = MutableLiveData<HotelModel>()
     val hotelImage = MutableLiveData<BitmapDrawable>()

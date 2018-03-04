@@ -4,14 +4,14 @@ import android.arch.lifecycle.Observer
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import com.admin.theapp.R
-import com.admin.theapp.base.BaseActivityNew
+import com.admin.theapp.base.BaseActivity
 import com.admin.theapp.utils.Constants
 import com.admin.theapp.utils.toast
 import com.admin.theapp.viewmodel.HotelDetailsViewModel
 import com.theapp.entities.HotelModel
 import kotlinx.android.synthetic.main.hotel_details.*
 
-class HotelDetailsActivity : BaseActivityNew<HotelDetailsViewModel>() {
+class HotelDetailsActivity : BaseActivity<HotelDetailsViewModel>() {
     override val vmClass = HotelDetailsViewModel::class.java
     override val layoutRes = R.layout.hotel_details
 

@@ -12,7 +12,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-abstract class BaseViewModelNew(private val logger: Logger) : ViewModel(), LifecycleObserver {
+abstract class BaseViewModel(private val logger: Logger) : ViewModel(), LifecycleObserver {
 
     private val disposables = CompositeDisposable()
 
@@ -82,7 +82,7 @@ abstract class BaseViewModelNew(private val logger: Logger) : ViewModel(), Lifec
     private fun emptyComplete(): () -> Unit = {}
 
     private fun defaultError(): (Throwable) -> Unit = {
-        logger.e(BaseViewModelNew::class.java.simpleName, it.message ?: "", it)
+        logger.e(BaseViewModel::class.java.simpleName, it.message ?: "", it)
     }
 
     private fun emptySubscribe(): (Disposable) -> Unit = {}
