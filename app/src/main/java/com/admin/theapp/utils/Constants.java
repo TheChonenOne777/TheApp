@@ -5,4 +5,5 @@ public final class Constants {
     }
 
     public static final int HOTELS_CACHE_SIZE = 100;
+    public static final String EXTRA_HOTEL_DETAILS_ACTIVITY = "id";
 }
