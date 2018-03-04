@@ -20,6 +20,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
 
+/**
+ * @deprecated Use {@link BaseActivityNew}
+ */
+@Deprecated
 public abstract class BaseActivity<T extends BaseViewModel> extends AppCompatActivity {
 
     @Inject
