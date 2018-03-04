@@ -22,11 +22,11 @@ class HotelsActivity : BaseActivity<HotelsViewModel>(), HotelsAdapter.ItemClickL
     @Inject
     lateinit var hotelsAdapter: HotelsAdapter
 
-    private val hotelsObserver = Observer<List<HotelModel>> { it?.let { hotelsAdapter.setData(it) } }
+    private val hotelsObserver = Observer<List<HotelModel>> { it?.let { hotelsAdapter.hotels = it.toMutableList() } }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        hotelsAdapter.setOnClickCallback(this)
+        hotelsAdapter.listener = this
         hotels_recycler_view.apply {
             adapter = hotelsAdapter
             layoutManager = LinearLayoutManager(this@HotelsActivity)

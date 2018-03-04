@@ -14,7 +14,7 @@
         android:contentDescription="@string/hotel_item_image_content_desc" />
 
     <TextView
-        android:id="@+id/hotel_details_name"
+        android:id="@+id/hotel_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"

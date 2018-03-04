@@ -20,7 +20,7 @@ class ViewModelFactory @Inject constructor(viewModelSubComponent: ViewModelSubCo
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         var creator = creators[modelClass]
-        if (creator == null) {
+        creator?.let {
             creators.entries.forEach {
                 if (modelClass.isAssignableFrom(it.key)) {
                     creator = it.value
