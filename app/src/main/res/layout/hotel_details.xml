@@ -62,34 +62,15 @@
             android:textSize="14sp"
             tools:text="suites_availability" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/hotel_details_on_map_button"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:clickable="true"
+            android:focusable="true"
             android:paddingBottom="4dp"
             android:paddingEnd="8dp"
-            android:paddingStart="8dp"
-            android:text="@string/hotel_details_coordinates"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/hotel_details_lat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="4dp"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp"
-            android:textSize="14sp"
-            tools:text="lat" />
-
-        <TextView
-            android:id="@+id/hotel_details_lon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="8dp"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp"
-            android:textSize="14sp"
-            tools:text="lon" />
+            android:paddingStart="8dp" />
 
     </LinearLayout>
 

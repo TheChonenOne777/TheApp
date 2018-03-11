@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">TheApp</string>
-    <string name="hotel_details_coordinates">On the map:</string>
+    <string name="hotel_details_coordinates">On map:</string>
     <string name="hotel_details_activity_display_message">Hotel Details</string>
     <string name="hotel_details_stars">Stars: %1$.1f</string>
     <string name="hotel_details_distance">Distance: %1$.2f(km)</string>
@@ -10,4 +10,5 @@
     <string name="star_view_not_rated_text">Not rated yet</string>
     <string name="hotel_does_not_exist_text">Hotel does not exist</string>
     <string name="hotel_item_image_content_desc">Hotel Image</string>
+    <string name="map_query">geo:%1$s,%2$s?q=%1$s,%2$s(%3$s)</string>
 </resources>

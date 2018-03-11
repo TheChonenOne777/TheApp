@@ -3,6 +3,8 @@ package com.theapp.repository
 import com.admin.theapp.Hotel
 import com.theapp.Cache
 import com.theapp.tools.adapters.DisposableCompletableObserverAdapter
+import io.reactivex.Maybe
+import java.net.URL
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -23,4 +25,6 @@ class HotelsRepo @Inject internal constructor(
                             })
 
     fun getBytes(name: String) = storage.getBytes(name)
+
+    fun getStream(link: String) = Maybe.fromCallable({ URL(link).openConnection().getInputStream() })
 }

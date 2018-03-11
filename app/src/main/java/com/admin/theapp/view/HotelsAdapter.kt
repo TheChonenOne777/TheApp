@@ -8,7 +8,6 @@ import com.admin.theapp.interactors.DataInteractor
 import com.admin.theapp.utils.Decoder
 import com.admin.theapp.utils.inflateView
 import com.theapp.entities.HotelModel
-import kotlinx.android.synthetic.main.hotel_details.view.*
 import kotlinx.android.synthetic.main.hotel_item.view.*
 import javax.inject.Inject
 
@@ -39,10 +38,10 @@ class HotelsAdapter @Inject constructor(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: HotelModel) = with(itemView) {
-            item.imageName?.let { dataInteractor.getBytes(it).subscribe({ hotel_image.setImageDrawable(decoder.decode(it)) }) }
+            item.imageName?.let { dataInteractor.getImageBytes(it).subscribe({ hotel_image.setImageDrawable(decoder.decode(it)) }) }
             hotel_name.text = item.name
             hotel_address.text = item.address
-            hotel_details_stars.setStars(item.stars)
+            hotel_stars.setStars(item.stars)
         }
     }
 
