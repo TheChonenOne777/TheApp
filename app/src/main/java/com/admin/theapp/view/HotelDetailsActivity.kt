@@ -29,12 +29,13 @@ class HotelDetailsActivity : BaseActivity<HotelDetailsViewModel>() {
         it.imageName?.let { viewModel.getImageByName(it) }
         viewModel.getMapThumbnail(it.lat, it.lon)
         hotel_details_on_map_button.setOnClickListener { _ ->
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(
+            intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(
                     R.string.map_query,
                     it.lat.toString(),
                     it.lon.toString(),
                     it.name.replace(' ', '+')
-            ))))
+            )))
+            if (intent.resolveActivity(packageManager) != null) startActivity(intent)
         }
     })
 
