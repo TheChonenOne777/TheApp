@@ -2,4 +2,5 @@
 <resources>
     <dimen name="stars_view_margin_start">8dp</dimen>
     <dimen name="star_view_height">24dp</dimen>
+    <dimen name="map_thumbnail_size">150dp</dimen>
 </resources>

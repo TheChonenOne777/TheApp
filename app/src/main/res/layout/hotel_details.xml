@@ -64,8 +64,8 @@
 
         <ImageView
             android:id="@+id/hotel_details_on_map_button"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/map_thumbnail_size"
+            android:layout_height="@dimen/map_thumbnail_size"
             android:clickable="true"
             android:focusable="true"
             android:paddingBottom="4dp"

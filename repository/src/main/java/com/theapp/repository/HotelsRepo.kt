@@ -26,5 +26,5 @@ class HotelsRepo @Inject internal constructor(
 
     fun getBytes(name: String) = storage.getBytes(name)
 
-    fun getStream(link: String) = Maybe.fromCallable({ URL(link).openConnection().getInputStream() })
+    fun getStream(link: String) = Maybe.fromCallable({ URL(link).openStream() })
 }

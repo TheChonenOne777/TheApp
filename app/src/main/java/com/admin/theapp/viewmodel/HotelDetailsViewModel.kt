@@ -33,12 +33,10 @@ class HotelDetailsViewModel @Inject constructor(
 
     fun getMapThumbnail(lat: Double, lon: Double) {
         dataInteractor.getImageStream(
-                "https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}" +
-                        "&zoom=15" +
-                        "&size=1000x1000" +
-                        "&maptype=roadmap" +
-                        "&markers=color:red%7Clabel:A%7C${lat},${lon}" +
-                        "&key=AIzaSyDpkQeM0ec2sQNxx-2S1xONWf6gQmk9Sc0"
+                "http://maps.google.com/maps/api/staticmap?center=${lat},${lon}" +
+                        "&zoom=16" +
+                        "&size=200x200" +
+                        "&sensor=true"
         ).execute(onSuccess = { mapImage.value = decoder.decode(it) })
     }
 }
