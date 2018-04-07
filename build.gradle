@@ -23,7 +23,7 @@ allprojects {
 }
 
 ext.compileSdkVersion = 27
-ext.buildToolsVersion = "27.0.1"
+ext.buildToolsVersion = "27.0.3"
 ext.minSdkVersion = 21
 ext.targetSdkVersion = 27
 
@@ -31,9 +31,7 @@ apply from: 'dependencies.gradle'
 repositories {
     mavenCentral()
 }
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-}
+
 compileKotlin {
     kotlinOptions {
         jvmTarget = "1.6"
