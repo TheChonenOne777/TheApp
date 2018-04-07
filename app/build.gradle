@@ -5,7 +5,6 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion project.property('compileSdkVersion')
-    buildToolsVersion project.property('buildToolsVersion')
     defaultConfig {
         applicationId "com.admin.theapp"
         minSdkVersion project.property('minSdkVersion')
@@ -24,6 +23,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
