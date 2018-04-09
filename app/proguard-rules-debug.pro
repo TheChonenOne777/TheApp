@@ -15,6 +15,7 @@
 
 -dontnote com.google.android.gms.**
 -dontnote org.apache.http.**
+-dontnote com.admin.theapp.ui.widget.**
 
 # Basic ProGuard rules for Firebase Android SDK 2.0.0+
 -keep class com.firebase.** { *; }
@@ -29,6 +30,10 @@
 # This rule will properly ProGuard all the model classes in
 # the package com.admin.theapp.firebase.entities.
 -keepclassmembers class com.admin.theapp.firebase.entities.** { *; }
+
+-dontpreverify
+-dontoptimize
+-dontobfuscate
 
 # If your project uses WebView with JS, uncomment the following
 # and specify the fully qualified class name to the JavaScript interface
