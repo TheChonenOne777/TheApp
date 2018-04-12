@@ -9,6 +9,32 @@
 
 # Add any project specific keep options here:
 
+-dontwarn com.google.errorprone.annotations.*
+-dontwarn javax.annotation.**
+-dontwarn java.awt.**
+
+-dontnote com.google.android.gms.**
+-dontnote org.apache.http.**
+-dontnote com.admin.theapp.ui.widget.**
+
+# Basic ProGuard rules for Firebase Android SDK 2.0.0+
+-keep class com.firebase.** { *; }
+-keep class org.apache.** { *; }
+-keepnames class com.fasterxml.jackson.** { *; }
+-keepnames class javax.servlet.** { *; }
+-keepnames class org.ietf.jgss.** { *; }
+-dontwarn org.apache.**
+-dontwarn org.w3c.dom.**
+# Add this global rule for firebase
+-keepattributes Signature
+# This rule will properly ProGuard all the model classes in
+# the package com.admin.theapp.firebase.entities.
+-keepclassmembers class com.admin.theapp.firebase.entities.** { *; }
+
+-dontpreverify
+-dontoptimize
+-dontobfuscate
+
 # If your project uses WebView with JS, uncomment the following
 # and specify the fully qualified class name to the JavaScript interface
 # class:
