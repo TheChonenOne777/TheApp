@@ -13,5 +13,7 @@ class DataInteractor @Inject constructor() {
 
     fun getHotelById(id: Long) = hotelsRepo.getHotelById(id)
 
-    fun getBytes(name: String) = hotelsRepo.getBytes(name)
+    fun getImageBytes(name: String) = hotelsRepo.getBytes(name)
+
+    fun getImageStream(link: String) = hotelsRepo.getStream(link)
 }

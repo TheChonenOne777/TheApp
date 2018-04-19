@@ -38,7 +38,7 @@ class HotelsAdapter @Inject constructor(
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(item: HotelModel) = with(itemView) {
-            item.imageName?.let { dataInteractor.getBytes(it).subscribe({ hotel_image.setImageDrawable(decoder.decode(it)) }) }
+            item.imageName?.let { dataInteractor.getImageBytes(it).subscribe({ hotel_image.setImageDrawable(decoder.decode(it)) }) }
             hotel_name.text = item.name
             hotel_address.text = item.address
             hotel_stars.setStars(item.stars)

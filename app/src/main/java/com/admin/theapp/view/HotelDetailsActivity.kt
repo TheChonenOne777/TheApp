@@ -1,7 +1,10 @@
 package com.admin.theapp.view
 
 import android.arch.lifecycle.Observer
+import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
 import com.admin.theapp.R
 import com.admin.theapp.base.BaseActivity
@@ -23,12 +26,22 @@ class HotelDetailsActivity : BaseActivity<HotelDetailsViewModel>() {
         hotel_details_stars.setStars(it.stars)
         hotel_details_distance.text = it.distance.toString()
         hotel_details_suites_availability.text = it.suitesAvailability
-        hotel_details_lat.text = it.lat.toString()
-        hotel_details_lon.text = it.lon.toString()
         it.imageName?.let { viewModel.getImageByName(it) }
+        viewModel.getMapThumbnail(it.lat, it.lon)
+        hotel_details_on_map_button.setOnClickListener { _ ->
+            intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(
+                    R.string.map_query,
+                    it.lat.toString(),
+                    it.lon.toString(),
+                    it.name.replace(' ', '+')
+            )))
+            if (intent.resolveActivity(packageManager) != null) startActivity(intent)
+        }
     })
 
     private val hotelImageObserver = Observer<BitmapDrawable>({ hotel_details_image.setImageDrawable(it) })
+
+    private val mapImageObserver = Observer<Bitmap>({ hotel_details_on_map_button.setImageBitmap(it) })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +54,7 @@ class HotelDetailsActivity : BaseActivity<HotelDetailsViewModel>() {
         viewModel.retrieveHotelModel(hotelId)
         viewModel.hotelModel.observe(this, hotelModelObserver)
         viewModel.hotelImage.observe(this, hotelImageObserver)
+        viewModel.mapImage.observe(this, mapImageObserver)
     }
 
     private companion object {
