@@ -2,14 +2,14 @@
 apply plugin: 'kotlin'
 
 buildscript {
-    ext.kotlin_version = '1.2.30'
+    ext.kotlin_version = '1.2.31'
     repositories {
         jcenter()
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath 'com.google.gms:google-services:3.1.0'
+        classpath 'com.android.tools.build:gradle:3.1.1'
+        classpath 'com.google.gms:google-services:3.2.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -23,24 +23,18 @@ allprojects {
 }
 
 ext.compileSdkVersion = 27
-ext.buildToolsVersion = "27.0.1"
-ext.minSdkVersion = 21
+ext.buildToolsVersion = "27.0.3"
+ext.minSdkVersion = hasProperty('minSdk') ? minSdk.toInteger() : 21
 ext.targetSdkVersion = 27
 
+clean {
+    delete rootProject.buildDir
+}
+
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xmaxerrs" << "1000"
+    }
+}
+
 apply from: 'dependencies.gradle'
-repositories {
-    mavenCentral()
-}
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-}
-compileKotlin {
-    kotlinOptions {
-        jvmTarget = "1.6"
-    }
-}
-compileTestKotlin {
-    kotlinOptions {
-        jvmTarget = "1.6"
-    }
-}

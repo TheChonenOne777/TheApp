@@ -5,12 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.view.animation.AnimationUtils
 import com.admin.theapp.R
 import com.admin.theapp.base.BaseActivity
 import com.admin.theapp.utils.Constants
 import com.admin.theapp.viewmodel.HotelsViewModel
 import com.theapp.entities.HotelModel
 import kotlinx.android.synthetic.main.hotels_list.*
+import java.util.concurrent.ThreadLocalRandom
 import javax.inject.Inject
 
 class HotelsActivity : BaseActivity<HotelsViewModel>(), HotelsAdapter.ItemClickListener {
@@ -31,6 +33,7 @@ class HotelsActivity : BaseActivity<HotelsViewModel>(), HotelsAdapter.ItemClickL
             adapter = hotelsAdapter
             layoutManager = LinearLayoutManager(this@HotelsActivity)
             addItemDecoration(DividerItemDecoration(this@HotelsActivity, DividerItemDecoration.VERTICAL))
+            layoutAnimation = AnimationUtils.loadLayoutAnimation(this@HotelsActivity, getRandomLayoutAnimation())
         }
         viewModel.hotels.observe(this, hotelsObserver)
     }
@@ -40,4 +43,12 @@ class HotelsActivity : BaseActivity<HotelsViewModel>(), HotelsAdapter.ItemClickL
         intent.putExtra(Constants.EXTRA_HOTEL_DETAILS_ACTIVITY, hotelModel.id)
         startActivity(intent)
     }
+
+    private fun getRandomLayoutAnimation() = when ((0..3).rand()) {
+        0 -> R.anim.layout_animation_fall_down
+        1 -> R.anim.layout_animation_from_right
+        else -> R.anim.layout_animation_slide_in
+    }
+
+    private fun ClosedRange<Int>.rand() = ThreadLocalRandom.current().nextInt(endInclusive - start) + start
 }
